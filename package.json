@@ -1,20 +1,20 @@
 {
   "name": "@synvox/rehook",
   "public": true,
-  "version": "0.0.7",
+  "version": "0.0.8",
   "main": "dist/rehook.js",
   "umd:main": "dist/rehook.umd.js",
   "module": "dist/rehook.mjs",
   "source": "src/rehook/index.js",
   "devDependencies": {
     "@synvox/rehook": "^0.0.6",
+    "enzyme": "^3.7.0",
+    "enzyme-adapter-react-16": "^1.6.0",
     "microbundle": "^0.7.0",
     "react": "^16.7.0-alpha.0",
     "react-dom": "^16.7.0-alpha.0",
     "react-scripts": "2.1.0",
-    "recompose": "^0.30.0",
-    "enzyme": "^3.7.0",
-    "enzyme-adapter-react-16": "^1.6.0"
+    "recompose": "^0.30.0"
   },
   "peerDependencies": {
     "react": "^16.7.0-alpha.0",
