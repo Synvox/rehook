@@ -716,6 +716,10 @@
     "@svgr/core" "^2.4.1"
     loader-utils "^1.1.0"
 
+"@synvox/rehook@^0.0.6":
+  version "0.0.6"
+  resolved "https://registry.yarnpkg.com/@synvox/rehook/-/rehook-0.0.6.tgz#a762cfcbb2e9f13cc63b34fdbd21de7e9cd200ff"
+
 "@types/estree@0.0.39":
   version "0.0.39"
   resolved "https://registry.yarnpkg.com/@types/estree/-/estree-0.0.39.tgz#e177e699ee1b8c22d23174caaa7422644389509f"

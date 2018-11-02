@@ -1,4 +1,5 @@
-import { useMemo, useRef, useEffect } from "react";
+import React from "react";
+const { useMemo, useRef, useEffect } = React;
 
 function usePrevious(value) {
   const ref = useRef();

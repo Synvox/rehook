@@ -1,4 +1,5 @@
-import { useMemo } from "react";
+import React from "react";
+const { useMemo } = React;
 
 export default handlers => props => {
   const realHandlers = useMemo(

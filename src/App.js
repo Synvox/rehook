@@ -1,6 +1,6 @@
 import React from "react";
 
-import { rehook, withState, pipe, withHandlers } from "./rehook";
+import { rehook, withState, pipe, withHandlers } from "@synvox/rehook";
 
 const enhancer = pipe(
   withState("count", "setCount", 0),

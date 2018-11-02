@@ -1,4 +1,5 @@
-import { useReducer, useMemo } from "react";
+import React from "react";
+const { useReducer, useMemo } = React;
 
 export default (initialValue, handlers) => props => {
   const actionTypes = Object.keys(handlers);

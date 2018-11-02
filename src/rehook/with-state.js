@@ -1,4 +1,5 @@
-import { useState, useMemo } from "react";
+import React from "react";
+const { useState, useMemo } = React;
 
 export default (stateName, stateUpdaterName, initialState) => props => {
   const [state, update] = useState(

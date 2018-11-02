@@ -1,4 +1,5 @@
-import { useEffect, useRef, useState } from "react";
+import React from "react";
+const { useEffect, useRef, useState } = React;
 
 function usePrevious(value) {
   const ref = useRef();

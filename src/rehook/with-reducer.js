@@ -1,4 +1,5 @@
-import { useReducer, useMemo } from "react";
+import React from "react";
+const { useReducer, useMemo } = React;
 
 export default (stateName, dispatchName, reducer, initialValue) => props => {
   const [state, dispatch] = useReducer(

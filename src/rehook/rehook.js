@@ -1,4 +1,4 @@
-import { isValidElement } from "react";
+import React from "react";
 
 export default (component, deriveProps = x => x) => {
   const newComponent = props => {
@@ -7,7 +7,7 @@ export default (component, deriveProps = x => x) => {
     try {
       result = component(deriveProps(props));
     } catch (e) {
-      if (typeof e !== "object" || isValidElement(e)) result = e;
+      if (typeof e !== "object" || React.isValidElement(e)) result = e;
       else throw e;
     }
 

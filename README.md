@@ -1,6 +1,6 @@
 # Rehook
 
-Rehook implements an API similar to Recompose, but using hooks.
+Rehook implements an API similar to [Recompose](https://github.com/acdlite/recompose), but using hooks.
 
 ```
 npm i @synvox/rehook
@@ -90,16 +90,7 @@ _Full disclaimer: Most of these docs are modified from the Recompose docs._
 - [`branch()`](#branch)
 - [`renderComponent()`](#rendercomponent)
 - [`renderNothing()`](#rendernothing)
-- [`shouldUpdate()`](#shouldupdate)
-- [`pure()`](#pure)
-- [`onlyUpdateForKeys()`](#onlyupdateforkeys)
-- [`onlyUpdateForPropTypes()`](#onlyupdateforproptypes)
-- [`withContext()`](#withcontext)
-- [`getContext()`](#getcontext)
 - [`lifecycle()`](#lifecycle)
-- [`toClass()`](#toclass)
-- [`toRenderProps()`](#torenderprops)
-- [`fromRenderProps()`](#fromrenderprops)
 
 ### `rehook()`
 
