@@ -12,7 +12,9 @@
     "react": "^16.7.0-alpha.0",
     "react-dom": "^16.7.0-alpha.0",
     "react-scripts": "2.1.0",
-    "recompose": "^0.30.0"
+    "recompose": "^0.30.0",
+    "enzyme": "^3.7.0",
+    "enzyme-adapter-react-16": "^1.6.0"
   },
   "peerDependencies": {
     "react": "^16.7.0-alpha.0",

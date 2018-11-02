@@ -13,22 +13,25 @@ function usePrevious(value) {
 
 export default spec => props => {
   const [state, setStateRaw] = useState({});
-  const setState = update =>
+  const setState = update => {
     setStateRaw({
       ...state,
       ...(typeof update === "function" ? update(state) : update)
     });
+  };
+
+  const self = { props, state, setState };
 
   if (spec.componentDidMount) {
     useEffect(() => {
-      spec.componentDidMount.call({ props, state, setState });
+      spec.componentDidMount.call(self);
     }, []);
   }
 
   if (spec.componentWillUnmount) {
     useEffect(() => {
       return () => {
-        spec.componentWillUnmount.call({ props, state, setState });
+        spec.componentWillUnmount.call(self);
       };
     }, []);
   }
@@ -36,12 +39,7 @@ export default spec => props => {
   if (spec.componentDidUpdate) {
     const previousProps = usePrevious(props);
     useEffect(() => {
-      spec.componentDidUpdate.call(
-        { props, state, setState },
-        previousProps,
-        null,
-        null
-      );
+      spec.componentDidUpdate.call(self, previousProps, null, null);
     });
   }
 

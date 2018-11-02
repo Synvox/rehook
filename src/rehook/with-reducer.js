@@ -5,7 +5,7 @@ export default (stateName, dispatchName, reducer, initialValue) => props => {
   const [state, dispatch] = useReducer(
     reducer,
     typeof initialValue === "function"
-      ? useMemo(() => initialValue(props))
+      ? useMemo(() => initialValue(props), [])
       : initialValue
   );
 

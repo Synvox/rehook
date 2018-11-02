@@ -15,10 +15,10 @@ export default (shouldMapOrKeys, createProps) => props => {
   const previousProps = usePrevious(props);
 
   const keys = Array.isArray(shouldMapOrKeys)
-    ? shouldMapOrKeys
+    ? shouldMapOrKeys.map(key => props[key])
     : shouldMapOrKeys(props, previousProps)
-      ? [true]
-      : undefined;
+      ? undefined
+      : [];
 
   const mappedProps = useMemo(() => createProps(props), keys);
 
