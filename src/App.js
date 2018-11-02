@@ -1,28 +1,23 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
-  }
+import { rehook, withState, pipe, withHandlers } from "./rehook";
+
+const enhancer = pipe(
+  withState("count", "setCount", 0),
+  withHandlers({
+    increment: ({ count, setCount }) => () => setCount(count + 1),
+    decrement: ({ count, setCount }) => () => setCount(count - 1)
+  })
+);
+
+function Something({ count, increment, decrement }) {
+  return (
+    <div>
+      <button onClick={decrement}>-1</button>
+      {count}
+      <button onClick={increment}>+1</button>
+    </div>
+  );
 }
 
-export default App;
+export default rehook(Something, enhancer);
