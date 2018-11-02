@@ -1,4 +1,5 @@
 # Rehook
+[![Build Status](https://travis-ci.org/Synvox/rehook.svg?branch=master)](https://travis-ci.org/Synvox/rehook)
 
 Rehook implements an API similar to [Recompose](https://github.com/acdlite/recompose), but using hooks.
 
