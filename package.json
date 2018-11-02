@@ -1,16 +1,17 @@
 {
   "name": "@synvox/rehook",
   "public": true,
-  "version": "0.0.4",
+  "version": "0.0.5",
   "main": "dist/rehook.js",
   "umd:main": "dist/rehook.umd.js",
   "module": "dist/rehook.mjs",
   "source": "src/rehook/index.js",
   "devDependencies": {
+    "@synvox/rehook": "^0.0.4",
     "microbundle": "^0.7.0",
-    "react-scripts": "2.1.0",
     "react": "^16.7.0-alpha.0",
     "react-dom": "^16.7.0-alpha.0",
+    "react-scripts": "2.1.0",
     "recompose": "^0.30.0"
   },
   "peerDependencies": {
