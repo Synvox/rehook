@@ -1,3 +1,4 @@
+// @ts-check
 export { default as rehook } from "./rehook";
 
 export { default as branch } from "./branch";

@@ -1,6 +1,11 @@
 import React from "react";
 
-export default (component, deriveProps = x => x) => {
+/**
+ * @param {Function} component
+ * @param {Function} [deriveProps]
+ * @returns {Object}
+ */
+const rehook = (component, deriveProps = x => x) => {
   const newComponent = props => {
     let result = null;
 
@@ -19,3 +24,5 @@ export default (component, deriveProps = x => x) => {
 
   return newComponent;
 };
+
+export default rehook;

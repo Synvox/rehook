@@ -6,10 +6,13 @@
   "umd:main": "dist/rehook.umd.js",
   "module": "dist/rehook.mjs",
   "source": "src/rehook/index.js",
+  "types": "dist/rehook.d.ts",
   "devDependencies": {
+    "@otris/jsdoc-tsd": "^1.0.4",
     "@synvox/rehook": "^0.0.6",
     "enzyme": "^3.7.0",
     "enzyme-adapter-react-16": "^1.6.0",
+    "jsdoc": "^3.5.5",
     "microbundle": "^0.7.0",
     "react": "^16.7.0-alpha.0",
     "react-dom": "^16.7.0-alpha.0",
@@ -26,7 +29,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "build:bundle": "microbundle",
-    "prepublish": "npm run build:bundle"
+    "build:types": "jsdoc -t node_modules/@otris/jsdoc-tsd -r ./src/rehook -d dist/rehook.d.ts",
+    "prepublish": "npm run build:bundle && npm run build:types"
   },
   "eslintConfig": {
     "extends": "react-app"

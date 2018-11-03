@@ -1,4 +1,5 @@
 import React from "react";
+// @ts-ignore
 const { useEffect, useRef, useState } = React;
 
 function usePrevious(value) {
@@ -11,7 +12,11 @@ function usePrevious(value) {
   return ref.current;
 }
 
-export default spec => props => {
+/**
+ * @param {Object} spec
+ * @returns {Object}
+ */
+const lifecycle = spec => props => {
   const [state, setStateRaw] = useState({});
   const setState = update => {
     setStateRaw({
@@ -45,3 +50,5 @@ export default spec => props => {
 
   return { ...props, ...state };
 };
+
+export default lifecycle;

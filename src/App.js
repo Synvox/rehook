@@ -1,6 +1,5 @@
 import React from "react";
-
-import { rehook, withState, pipe, withHandlers } from "@synvox/rehook";
+import { rehook, withState, pipe, withHandlers } from "./rehook";
 
 const enhancer = pipe(
   withState("count", "setCount", 0),
@@ -10,14 +9,19 @@ const enhancer = pipe(
   })
 );
 
-function Something({ count, increment, decrement }) {
+/**
+ * @param {{children:any}} props
+ */
+function Something({ children }) {
+  const { count, increment, decrement } = enhancer();
   return (
     <div>
       <button onClick={decrement}>-1</button>
       {count}
       <button onClick={increment}>+1</button>
+      {children}
     </div>
   );
 }
 
-export default rehook(Something, enhancer);
+export default rehook(Something);

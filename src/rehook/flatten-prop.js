@@ -1,1 +1,7 @@
-export default propName => props => ({ ...props, ...props[propName] });
+/**
+ * @param {string} propName
+ * @returns {Object}
+ */
+const flattenProp = propName => props => ({ ...props, ...props[propName] });
+
+export default flattenProp;

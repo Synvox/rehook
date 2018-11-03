@@ -1,7 +1,14 @@
 import React from "react";
+// @ts-ignore
 const { useReducer, useMemo } = React;
 
-export default (initialValue, handlers) => props => {
+/**
+ *
+ * @param {any} initialValue
+ * @param {Object} handlers
+ * @returns {Object}
+ */
+const withStateHandlers = (initialValue, handlers) => props => {
   const actionTypes = Object.keys(handlers);
 
   const reducer = (state, action) => {
@@ -27,3 +34,5 @@ export default (initialValue, handlers) => props => {
 
   return { ...props, ...state, ...boundHandlers };
 };
+
+export default withStateHandlers;

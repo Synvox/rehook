@@ -1,4 +1,8 @@
-export default propMap => props => ({
+/**
+ * @param {Object} propMap
+ * @returns {Object}
+ */
+const renameProps = propMap => props => ({
   // Remove renamed props
   ...Object.entries(props)
     .filter(([key]) => !(key in propMap))
@@ -8,3 +12,5 @@ export default propMap => props => ({
     .map(([oldName, newName]) => [newName, props[oldName]])
     .reduce((obj, [k, v]) => Object.assign(obj, { [k]: v }), {})
 });
+
+export default renameProps;

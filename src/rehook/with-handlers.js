@@ -1,7 +1,13 @@
 import React from "react";
+// @ts-ignore
 const { useMemo } = React;
 
-export default handlers => props => {
+/**
+ *
+ * @param {Object} handlers
+ * @returns {Object}
+ */
+const withHandlers = handlers => props => {
   const realHandlers = useMemo(
     () => (typeof handlers === "function" ? handlers(props) : handlers),
     []
@@ -19,3 +25,5 @@ export default handlers => props => {
 
   return { ...props, ...boundHandlers };
 };
+
+export default withHandlers;

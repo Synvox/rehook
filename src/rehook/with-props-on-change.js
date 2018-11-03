@@ -1,4 +1,5 @@
 import React from "react";
+// @ts-ignore
 const { useMemo, useRef, useEffect } = React;
 
 function usePrevious(value) {
@@ -11,7 +12,13 @@ function usePrevious(value) {
   return ref.current;
 }
 
-export default (shouldMapOrKeys, createProps) => props => {
+/**
+ *
+ * @param {any} shouldMapOrKeys
+ * @param {Function} createProps
+ * @returns {Object}
+ */
+const withPropsOnChange = (shouldMapOrKeys, createProps) => props => {
   const previousProps = usePrevious(props);
 
   const keys = Array.isArray(shouldMapOrKeys)
@@ -27,3 +34,5 @@ export default (shouldMapOrKeys, createProps) => props => {
     ...mappedProps
   };
 };
+
+export default withPropsOnChange;

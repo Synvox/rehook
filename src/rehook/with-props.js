@@ -1,4 +1,10 @@
-export default fn => props => ({
+/**
+ *
+ * @param {Function} fn
+ */
+const withProps = fn => props => ({
   ...props,
   ...(typeof fn === "function" ? fn(props) : fn)
 });
+
+export default withProps;

@@ -1,7 +1,20 @@
 import React from "react";
+// @ts-ignore
 const { useReducer, useMemo } = React;
 
-export default (stateName, dispatchName, reducer, initialValue) => props => {
+/**
+ *
+ * @param {string} stateName
+ * @param {string} dispatchName
+ * @param {Function} reducer
+ * @param {any} initialValue
+ */
+const withReducer = (
+  stateName,
+  dispatchName,
+  reducer,
+  initialValue
+) => props => {
   const [state, dispatch] = useReducer(
     reducer,
     typeof initialValue === "function"
@@ -11,3 +24,5 @@ export default (stateName, dispatchName, reducer, initialValue) => props => {
 
   return { ...props, [stateName]: state, [dispatchName]: dispatch };
 };
+
+export default withReducer;
