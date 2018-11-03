@@ -1,7 +1,7 @@
 {
   "name": "@synvox/rehook",
   "public": true,
-  "version": "0.0.8",
+  "version": "0.0.9",
   "main": "dist/rehook.js",
   "umd:main": "dist/rehook.umd.js",
   "module": "dist/rehook.mjs",
