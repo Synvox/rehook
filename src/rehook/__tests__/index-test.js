@@ -1,23 +1,25 @@
-import * as exported from "../";
+/* eslint-env jest */
 
-test("exports expected", () => {
+import * as exported from '../'
+
+test('exports expected', () => {
   expect(Object.keys(exported)).toEqual([
-    "branch",
-    "catchRender",
-    "defaultProps",
-    "flattenProp",
-    "lifecycle",
-    "mapProps",
-    "pipe",
-    "renameProp",
-    "renameProps",
-    "renderComponent",
-    "renderNothing",
-    "withHandlers",
-    "withPropsOnChange",
-    "withProps",
-    "withReducer",
-    "withStateHandlers",
-    "withState"
-  ]);
-});
+    'branch',
+    'catchRender',
+    'defaultProps',
+    'flattenProp',
+    'lifecycle',
+    'mapProps',
+    'pipe',
+    'renameProp',
+    'renameProps',
+    'renderComponent',
+    'renderNothing',
+    'withHandlers',
+    'withPropsOnChange',
+    'withProps',
+    'withReducer',
+    'withStateHandlers',
+    'withState',
+  ])
+})

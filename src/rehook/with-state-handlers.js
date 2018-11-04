@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react'
 // @ts-ignore
-const { useReducer, useMemo } = React;
+const { useReducer, useMemo } = React
 
 /**
  *
@@ -9,30 +9,30 @@ const { useReducer, useMemo } = React;
  * @returns {Object}
  */
 const withStateHandlers = (initialValue, handlers) => props => {
-  const actionTypes = Object.keys(handlers);
+  const actionTypes = Object.keys(handlers)
 
   const reducer = (state, action) => {
-    return { ...state, ...handlers[action.type](state, props)(action.payload) };
-  };
+    return { ...state, ...handlers[action.type](state, props)(action.payload) }
+  }
 
   const [state, dispatch] = useReducer(
     reducer,
-    typeof initialValue === "function"
+    typeof initialValue === 'function'
       ? useMemo(() => initialValue(props), [])
       : initialValue
-  );
+  )
 
   const boundHandlers = actionTypes.reduce(
     (obj, type) =>
       Object.assign(obj, {
         [type]: payload => {
-          if (payload !== undefined) dispatch({ type, payload });
-        }
+          if (payload !== undefined) dispatch({ type, payload })
+        },
       }),
     {}
-  );
+  )
 
-  return { ...props, ...state, ...boundHandlers };
-};
+  return { ...props, ...state, ...boundHandlers }
+}
 
-export default withStateHandlers;
+export default withStateHandlers

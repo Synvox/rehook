@@ -5,7 +5,7 @@
  */
 const renameProp = (a, b) => ({ [a]: prop, ...props }) => ({
   ...props,
-  [b]: prop
-});
+  [b]: prop,
+})
 
-export default renameProp;
+export default renameProp

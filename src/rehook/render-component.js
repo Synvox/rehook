@@ -3,7 +3,7 @@
  * @returns {Object}
  */
 const renderComponent = comp => props => {
-  throw comp(props);
-};
+  throw comp(props)
+}
 
-export default renderComponent;
+export default renderComponent

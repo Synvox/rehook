@@ -1,44 +1,46 @@
-import testUtil from "../test-util";
-import withStateHandlers from "../with-state-handlers";
+/* eslint-env jest */
 
-test("with state handlers", () => {
+import testUtil from '../test-util'
+import withStateHandlers from '../with-state-handlers'
+
+test('with state handlers', () => {
   const getProps = testUtil(
     withStateHandlers(
       { b: false },
       {
-        handle: () => ({ b }) => ({ b })
+        handle: () => ({ b }) => ({ b }),
       }
     ),
     {}
-  );
+  )
 
-  getProps().handle({ b: true });
-  expect(getProps().b).toEqual(true);
-});
+  getProps().handle({ b: true })
+  expect(getProps().b).toEqual(true)
+})
 
-test("with state handlers calling undefined", () => {
+test('with state handlers calling undefined', () => {
   const getProps = testUtil(
     withStateHandlers(
       { b: false },
       {
-        handle: () => () => undefined
+        handle: () => () => undefined,
       }
     ),
     {}
-  );
+  )
 
-  getProps().handle();
-  expect(getProps().b).toEqual(false);
-});
+  getProps().handle()
+  expect(getProps().b).toEqual(false)
+})
 
-test("with state handlers memo", () => {
+test('with state handlers memo', () => {
   const getProps = testUtil(
     withStateHandlers(() => ({ b: false }), {
-      handle: () => ({ b }) => ({ b })
+      handle: () => ({ b }) => ({ b }),
     }),
     {}
-  );
+  )
 
-  getProps().handle({ b: true });
-  expect(getProps().b).toEqual(true);
-});
+  getProps().handle({ b: true })
+  expect(getProps().b).toEqual(true)
+})

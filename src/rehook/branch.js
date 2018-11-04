@@ -9,7 +9,7 @@
  * @returns {Function}
  */
 const branch = (condition, left, right = x => x) => props => {
-  return condition(props) ? left(props) : right(props);
-};
+  return condition(props) ? left(props) : right(props)
+}
 
-export default branch;
+export default branch

@@ -1,8 +1,10 @@
-import testUtil from "../test-util";
-import branch from "../branch";
-import withProps from "../with-props";
+/* eslint-env jest */
 
-test("branch left", () => {
+import testUtil from '../test-util'
+import branch from '../branch'
+import withProps from '../with-props'
+
+test('branch left', () => {
   const getProps = testUtil(
     branch(
       ({ val }) => val,
@@ -10,12 +12,12 @@ test("branch left", () => {
       withProps({ right: true })
     ),
     { val: true }
-  );
+  )
 
-  expect(getProps().left).toBe(true);
-});
+  expect(getProps().left).toBe(true)
+})
 
-test("branch right", () => {
+test('branch right', () => {
   const getProps = testUtil(
     branch(
       ({ val }) => val,
@@ -23,16 +25,16 @@ test("branch right", () => {
       withProps({ right: true })
     ),
     { val: false }
-  );
+  )
 
-  expect(getProps().right).toBe(true);
-});
+  expect(getProps().right).toBe(true)
+})
 
-test("branch without right", () => {
+test('branch without right', () => {
   const getProps = testUtil(
     branch(({ val }) => val, withProps({ left: true })),
     { val: false }
-  );
+  )
 
-  expect(getProps()).toEqual({ val: false });
-});
+  expect(getProps()).toEqual({ val: false })
+})

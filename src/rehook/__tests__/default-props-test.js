@@ -1,24 +1,26 @@
-import testUtil from "../test-util";
-import defaultProps from "../default-props";
+/* eslint-env jest */
 
-test("default props without prop", () => {
+import testUtil from '../test-util'
+import defaultProps from '../default-props'
+
+test('default props without prop', () => {
   const getProps = testUtil(
     defaultProps({
-      val: false
+      val: false,
     }),
     {}
-  );
+  )
 
-  expect(getProps().val).toBe(false);
-});
+  expect(getProps().val).toBe(false)
+})
 
-test("default props with prop", () => {
+test('default props with prop', () => {
   const getProps = testUtil(
     defaultProps({
-      val: false
+      val: false,
     }),
     { val: true }
-  );
+  )
 
-  expect(getProps().val).toBe(true);
-});
+  expect(getProps().val).toBe(true)
+})

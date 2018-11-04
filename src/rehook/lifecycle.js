@@ -1,15 +1,15 @@
-import React from "react";
+import React from 'react'
 // @ts-ignore
-const { useEffect, useRef, useState } = React;
+const { useEffect, useRef, useState } = React
 
 function usePrevious(value) {
-  const ref = useRef();
+  const ref = useRef()
 
   useEffect(() => {
-    ref.current = value;
-  });
+    ref.current = value
+  })
 
-  return ref.current;
+  return ref.current
 }
 
 /**
@@ -17,38 +17,38 @@ function usePrevious(value) {
  * @returns {Object}
  */
 const lifecycle = spec => props => {
-  const [state, setStateRaw] = useState({});
+  const [state, setStateRaw] = useState({})
   const setState = update => {
     setStateRaw({
       ...state,
-      ...(typeof update === "function" ? update(state) : update)
-    });
-  };
+      ...(typeof update === 'function' ? update(state) : update),
+    })
+  }
 
-  const self = { props, state, setState };
+  const self = { props, state, setState }
 
   if (spec.componentDidMount) {
     useEffect(() => {
-      spec.componentDidMount.call(self);
-    }, []);
+      spec.componentDidMount.call(self)
+    }, [])
   }
 
   if (spec.componentWillUnmount) {
     useEffect(() => {
       return () => {
-        spec.componentWillUnmount.call(self);
-      };
-    }, []);
+        spec.componentWillUnmount.call(self)
+      }
+    }, [])
   }
 
   if (spec.componentDidUpdate) {
-    const previousProps = usePrevious(props);
+    const previousProps = usePrevious(props)
     useEffect(() => {
-      spec.componentDidUpdate.call(self, previousProps, null, null);
-    });
+      spec.componentDidUpdate.call(self, previousProps, null, null)
+    })
   }
 
-  return { ...props, ...state };
-};
+  return { ...props, ...state }
+}
 
-export default lifecycle;
+export default lifecycle

@@ -1,19 +1,19 @@
 // @TODO build a demo site.
 
-import React from "react";
+import React from 'react'
 
-import { withState, pipe, withHandlers } from "./rehook";
+import { withState, pipe, withHandlers } from './rehook'
 
 const useCount = pipe(
-  withState("count", "setCount", 0),
+  withState('count', 'setCount', 0),
   withHandlers({
     increment: ({ count, setCount }) => () => setCount(count + 1),
-    decrement: ({ count, setCount }) => () => setCount(count - 1)
+    decrement: ({ count, setCount }) => () => setCount(count - 1),
   })
-);
+)
 
 function Something() {
-  const { count, increment, decrement } = useCount();
+  const { count, increment, decrement } = useCount()
 
   return (
     <div>
@@ -21,7 +21,7 @@ function Something() {
       {count}
       <button onClick={increment}>+1</button>
     </div>
-  );
+  )
 }
 
-export default Something;
+export default Something

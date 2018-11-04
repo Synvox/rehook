@@ -1,8 +1,10 @@
-import testUtil from "../test-util";
-import renameProp from "../rename-prop";
+/* eslint-env jest */
 
-test("branch left", () => {
-  const getProps = testUtil(renameProp("val", "renamed"), { val: true });
+import testUtil from '../test-util'
+import renameProp from '../rename-prop'
 
-  expect(getProps().renamed).toBe(true);
-});
+test('branch left', () => {
+  const getProps = testUtil(renameProp('val', 'renamed'), { val: true })
+
+  expect(getProps().renamed).toBe(true)
+})

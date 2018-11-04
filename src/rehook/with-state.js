@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react'
 // @ts-ignore
-const { useState, useMemo } = React;
+const { useState, useMemo } = React
 
 /**
  *
@@ -10,16 +10,16 @@ const { useState, useMemo } = React;
  */
 const withState = (stateName, stateUpdaterName, initialState) => props => {
   const [state, update] = useState(
-    typeof initialState === "function"
+    typeof initialState === 'function'
       ? useMemo(() => initialState(props), [])
       : initialState
-  );
+  )
 
   return {
     ...props,
     [stateName]: state,
-    [stateUpdaterName]: update
-  };
-};
+    [stateUpdaterName]: update,
+  }
+}
 
-export default withState;
+export default withState

@@ -1,9 +1,11 @@
-import testUtil from "../test-util";
-import flattenProp from "../flatten-prop";
+/* eslint-env jest */
 
-test("flattens props", () => {
-  const getProps = testUtil(flattenProp("obj"), { obj: { a: true, b: false } });
+import testUtil from '../test-util'
+import flattenProp from '../flatten-prop'
 
-  expect(getProps().a).toBe(true);
-  expect(getProps().b).toBe(false);
-});
+test('flattens props', () => {
+  const getProps = testUtil(flattenProp('obj'), { obj: { a: true, b: false } })
+
+  expect(getProps().a).toBe(true)
+  expect(getProps().b).toBe(false)
+})

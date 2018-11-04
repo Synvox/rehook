@@ -10,7 +10,7 @@ const renameProps = propMap => props => ({
   // Rename props
   ...Object.entries(propMap)
     .map(([oldName, newName]) => [newName, props[oldName]])
-    .reduce((obj, [k, v]) => Object.assign(obj, { [k]: v }), {})
-});
+    .reduce((obj, [k, v]) => Object.assign(obj, { [k]: v }), {}),
+})
 
-export default renameProps;
+export default renameProps

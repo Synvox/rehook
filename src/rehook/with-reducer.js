@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react'
 // @ts-ignore
-const { useReducer, useMemo } = React;
+const { useReducer, useMemo } = React
 
 /**
  *
@@ -17,12 +17,12 @@ const withReducer = (
 ) => props => {
   const [state, dispatch] = useReducer(
     reducer,
-    typeof initialValue === "function"
+    typeof initialValue === 'function'
       ? useMemo(() => initialValue(props), [])
       : initialValue
-  );
+  )
 
-  return { ...props, [stateName]: state, [dispatchName]: dispatch };
-};
+  return { ...props, [stateName]: state, [dispatchName]: dispatch }
+}
 
-export default withReducer;
+export default withReducer

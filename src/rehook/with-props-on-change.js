@@ -1,15 +1,15 @@
-import React from "react";
+import React from 'react'
 // @ts-ignore
-const { useMemo, useRef, useEffect } = React;
+const { useMemo, useRef, useEffect } = React
 
 function usePrevious(value) {
-  const ref = useRef();
+  const ref = useRef()
 
   useEffect(() => {
-    ref.current = value;
-  });
+    ref.current = value
+  })
 
-  return ref.current;
+  return ref.current
 }
 
 /**
@@ -19,20 +19,20 @@ function usePrevious(value) {
  * @returns {Object}
  */
 const withPropsOnChange = (shouldMapOrKeys, createProps) => props => {
-  const previousProps = usePrevious(props);
+  const previousProps = usePrevious(props)
 
   const keys = Array.isArray(shouldMapOrKeys)
     ? shouldMapOrKeys.map(key => props[key])
     : shouldMapOrKeys(props, previousProps)
       ? undefined
-      : [];
+      : []
 
-  const mappedProps = useMemo(() => createProps(props), keys);
+  const mappedProps = useMemo(() => createProps(props), keys)
 
   return {
     ...props,
-    ...mappedProps
-  };
-};
+    ...mappedProps,
+  }
+}
 
-export default withPropsOnChange;
+export default withPropsOnChange

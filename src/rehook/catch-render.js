@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react'
 
 /**
  * @param {Function} component
@@ -6,22 +6,22 @@ import React from "react";
  */
 const catchRender = component => {
   const newComponent = props => {
-    let result = null;
+    let result = null
 
     try {
-      result = component(props);
+      result = component(props)
     } catch (e) {
-      if (typeof e !== "object" || React.isValidElement(e)) result = e;
-      else throw e;
+      if (typeof e !== 'object' || React.isValidElement(e)) result = e
+      else throw e
     }
 
-    return result;
-  };
+    return result
+  }
 
   newComponent.displayName =
-    component.displayName || component.name || "Component";
+    component.displayName || component.name || 'Component'
 
-  return newComponent;
-};
+  return newComponent
+}
 
-export default catchRender;
+export default catchRender

@@ -1,12 +1,14 @@
-import testUtil from "../test-util";
-import withProps from "../with-props";
+/* eslint-env jest */
 
-test("maps props", () => {
+import testUtil from '../test-util'
+import withProps from '../with-props'
+
+test('maps props', () => {
   const getProps = testUtil(withProps(({ b }) => ({ b })), {
     a: true,
-    b: false
-  });
+    b: false,
+  })
 
-  expect(getProps().a).toBe(true);
-  expect(getProps().b).toBe(false);
-});
+  expect(getProps().a).toBe(true)
+  expect(getProps().b).toBe(false)
+})

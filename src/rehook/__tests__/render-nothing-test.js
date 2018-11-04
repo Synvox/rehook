@@ -1,13 +1,14 @@
-import renderNothing from "../render-nothing";
+/* eslint-env jest */
+import renderNothing from '../render-nothing'
 
-test("render nothing", () => {
-  let e = undefined;
+test('render nothing', () => {
+  let e
 
   try {
-    renderNothing();
+    renderNothing()
   } catch (thrown) {
-    e = thrown;
+    e = thrown
   }
 
-  expect(e).toBe(null);
-});
+  expect(e).toBe(null)
+})

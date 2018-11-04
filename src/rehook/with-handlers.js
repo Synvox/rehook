@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react'
 // @ts-ignore
-const { useMemo } = React;
+const { useMemo } = React
 
 /**
  *
@@ -9,21 +9,21 @@ const { useMemo } = React;
  */
 const withHandlers = handlers => props => {
   const realHandlers = useMemo(
-    () => (typeof handlers === "function" ? handlers(props) : handlers),
+    () => (typeof handlers === 'function' ? handlers(props) : handlers),
     []
-  );
+  )
 
-  const actionTypes = Object.keys(realHandlers);
+  const actionTypes = Object.keys(realHandlers)
 
   const boundHandlers = actionTypes.reduce(
     (obj, type) =>
       Object.assign(obj, {
-        [type]: payload => realHandlers[type](props)(payload)
+        [type]: payload => realHandlers[type](props)(payload),
       }),
     {}
-  );
+  )
 
-  return { ...props, ...boundHandlers };
-};
+  return { ...props, ...boundHandlers }
+}
 
-export default withHandlers;
+export default withHandlers
