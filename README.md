@@ -1,5 +1,7 @@
 # Rehook
 
+[![Build Status](https://travis-ci.org/Synvox/rehook.svg?branch=master)](https://travis-ci.org/Synvox/rehook)
+
 Rehook implements an API similar to [Recompose](https://github.com/acdlite/recompose), but using hooks.
 
 ```
@@ -18,27 +20,27 @@ When promises were introduced, suddenly developers were able to chain asynchrono
 
 Then the JavaScript community got `async/await`. It was like magic! Suddenly we could write asynchronous code imperatively, and it used promises under the hood. This was important because Promise based logic could be easily reused with `async/await`.
 
-_In React, we’re undergoing the same renaissance._ Higher Order Components are like Promises: easily composable, not easily understood. Render Props are like callbacks: understandable, flexible, not easily composable. React hooks are like `async/await`. Suddenly we can write understandable, composable logic and decouple reusable logic from components.
+**In React, we’re undergoing the same renaissance.** Higher Order Components are like Promises: easily composable, not easily understood. Render Props are like callbacks: understandable, flexible, not easily composable. React hooks are like `async/await`. Suddenly we can write understandable, composable logic and decouple reusable logic from components.
 
-There are tons of higher order component code written with Recompose, that could (and should) use hooks instead, but there is no migration plan. Luckily recompose in an implementation of functional mixins on React components. We can recreate this interface but use hooks instead of components. _This way you can use your existing Recompose enhancers as hooks_, similar to how you can use your existing Promise based code with async/await.
+There are tons of higher order component code written with Recompose, that could (and should) use hooks instead, but there is no migration plan. Luckily recompose in an implementation of functional mixins on React components. We can recreate this interface but use hooks instead of components. **This way you can use your existing Recompose enhancers as hooks**, similar to how you can use your existing Promise based code with async/await.
 
-_With Rehook_
+**With Rehook**
 
 ```js
-import React from "react";
+import React from 'react'
 
-import { withState, pipe, withHandlers } from "@synvox/rehook";
+import { withState, pipe, withHandlers } from '@synvox/rehook'
 
 const useCount = pipe(
-  withState("count", "setCount", 0),
+  withState('count', 'setCount', 0),
   withHandlers({
     increment: ({ count, setCount }) => () => setCount(count + 1),
-    decrement: ({ count, setCount }) => () => setCount(count - 1)
+    decrement: ({ count, setCount }) => () => setCount(count - 1),
   })
-);
+)
 
 function Something() {
-  const { count, increment, decrement } = useCount();
+  const { count, increment, decrement } = useCount()
 
   return (
     <div>
@@ -46,26 +48,26 @@ function Something() {
       {count}
       <button onClick={increment}>+1</button>
     </div>
-  );
+  )
 }
 
-export default Something;
+export default Something
 ```
 
-_With Recompose_
+**With Recompose**
 
 ```js
-import React from "react";
+import React from 'react'
 
-import { compose, withState, withHandlers } from "recompose";
+import { compose, withState, withHandlers } from 'recompose'
 
 const enhance = compose(
-  withState("count", "setCount", 0),
+  withState('count', 'setCount', 0),
   withHandlers({
     increment: ({ count, setCount }) => () => setCount(count + 1),
-    decrement: ({ count, setCount }) => () => setCount(count - 1)
+    decrement: ({ count, setCount }) => () => setCount(count - 1),
   })
-);
+)
 
 function Something({ count, increment, decrement }) {
   return (
@@ -74,10 +76,10 @@ function Something({ count, increment, decrement }) {
       {count}
       <button onClick={increment}>+1</button>
     </div>
-  );
+  )
 }
 
-export default enhance(Something);
+export default enhance(Something)
 ```
 
 Notice how subtle the changes are.
@@ -168,20 +170,20 @@ Usage example:
 
 ```js
 const useForm = pipe(
-  withState("value", "updateValue", ""),
+  withState('value', 'updateValue', ''),
   withHandlers({
     onChange: props => event => {
-      props.updateValue(event.target.value);
+      props.updateValue(event.target.value)
     },
     onSubmit: props => event => {
-      event.preventDefault();
-      submitForm(props.value);
-    }
+      event.preventDefault()
+      submitForm(props.value)
+    },
   })
-);
+)
 
 function Form() {
-  const { value, onChange, onSubmit } = useForm();
+  const { value, onChange, onSubmit } = useForm()
 
   return (
     <form onSubmit={onSubmit}>
@@ -190,7 +192,7 @@ function Form() {
         <input type="text" value={value} onChange={onChange} />
       </label>
     </form>
-  );
+  )
 }
 ```
 
@@ -238,11 +240,11 @@ Flattens a prop so that its fields are spread out into the props object.
 ```js
 const useProps = pipe(
   withProps({
-    object: { a: "a", b: "b" },
-    c: "c"
+    object: { a: 'a', b: 'b' },
+    c: 'c',
   }),
-  flattenProp("object")
-);
+  flattenProp('object')
+)
 
 // useProps() returns: { a: 'a', b: 'b', c: 'c', object: { a: 'a', b: 'b' } }
 ```
@@ -268,13 +270,13 @@ The first form accepts a function which maps the previous state value to a new s
 
 ```js
 const addCounting = pipe(
-  withState("counter", "setCounter", 0),
+  withState('counter', 'setCounter', 0),
   withHandlers({
     increment: ({ setCounter }) => () => setCounter(n => n + 1),
     decrement: ({ setCounter }) => () => setCounter(n => n - 1),
-    reset: ({ setCounter }) => () => setCounter(0)
+    reset: ({ setCounter }) => () => setCounter(0),
   })
-);
+)
 ```
 
 The second form accepts a single value, which is used as the new state.
@@ -292,9 +294,9 @@ withStateHandlers(
     [key: string]: (
       state: Object,
       props: Object
-    ) => (...payload: any[]) => Object
+    ) => (...payload: any[]) => Object,
   })
-);
+)
 ```
 
 Passes state object properties and immutable updater functions
@@ -308,23 +310,23 @@ Example:
 ```js
 const useCounter = withStateHandlers(
   ({ initialCounter = 0 }) => ({
-    counter: initialCounter
+    counter: initialCounter,
   }),
   {
     incrementOn: ({ counter }) => value => ({
-      counter: counter + value
+      counter: counter + value,
     }),
     decrementOn: ({ counter }) => value => ({
-      counter: counter - value
+      counter: counter - value,
     }),
     resetCounter: (_, { initialCounter = 0 }) => () => ({
-      counter: initialCounter
-    })
+      counter: initialCounter,
+    }),
   }
-);
+)
 
 function Counter() {
-  const { counter, incrementOn, decrementOn, resetCounter } = useCounter();
+  const { counter, incrementOn, decrementOn, resetCounter } = useCounter()
 
   return (
     <div>
@@ -332,7 +334,7 @@ function Counter() {
       <Button onClick={() => decrementOn(3)}>Dec</Button>
       <Button onClick={resetCounter}>Reset</Button>
     </div>
-  );
+  )
 }
 ```
 
@@ -417,7 +419,7 @@ export default Post
 ### `renderNothing()`
 
 ```js
-renderNothing: (props: Object) => Object;
+renderNothing: (props: Object) => Object
 ```
 
 An enhancer that always renders `null`. Use with `catchRender()`.
@@ -429,16 +431,16 @@ This is useful in combination with another helper that expects a higher-order co
 ```js
 // `hasNoData()` is a function that returns true if the component has
 // no data
-const hideIfNoData = hasNoData => branch(hasNoData, renderNothing);
+const hideIfNoData = hasNoData => branch(hasNoData, renderNothing)
 
 // Now use the `hideIfNoData()` helper to hide any base component
 const useHidden = hideIfNoData(
   props => !(props.title && props.author && props.content)
-);
+)
 
 const Post = catchRender(props => {
-  useHidden(props);
-  const { title, author, content } = props;
+  useHidden(props)
+  const { title, author, content } = props
 
   return (
     <article>
@@ -446,10 +448,10 @@ const Post = catchRender(props => {
       <h2>By {author.name}</h2>
       <div>{content}</div>
     </article>
-  );
-});
+  )
+})
 
-export default Post;
+export default Post
 ```
 
 ### `catchRender()`
@@ -480,13 +482,13 @@ Example:
 const usePosts = lifecycle({
   componentDidMount() {
     fetchPosts().then(posts => {
-      this.setState({ posts });
-    });
-  }
-});
+      this.setState({ posts })
+    })
+  },
+})
 
 function PostsList() {
-  const { posts = [] } = usePosts();
+  const { posts = [] } = usePosts()
 
   return (
     <ul>
@@ -494,6 +496,6 @@ function PostsList() {
         <li>{p.title}</li>
       ))}
     </ul>
-  );
+  )
 }
 ```
