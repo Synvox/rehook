@@ -4,8 +4,8 @@ const { useReducer, useMemo } = React
 
 /**
  *
- * @param {string} stateName
- * @param {string} dispatchName
+ * @param {string|symbol} stateName
+ * @param {string|symbol} dispatchName
  * @param {Function} reducer
  * @param {any} initialValue
  */

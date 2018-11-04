@@ -2,18 +2,27 @@
 
 import React from 'react'
 
-import { withState, pipe, withHandlers } from './rehook'
+import { withState, pipe, withHandlers, namespace } from './rehook'
 
-const useCount = pipe(
-  withState('count', 'setCount', 0),
-  withHandlers({
-    increment: ({ count, setCount }) => () => setCount(count + 1),
-    decrement: ({ count, setCount }) => () => setCount(count - 1),
-  })
-)
+const setCountSymbol = Symbol('setCount')
+
+const useCount = namespaceName =>
+  namespace(namespaceName, () =>
+    pipe(
+      withState('count', setCountSymbol, 0),
+      withHandlers({
+        increment: ({ count, [setCountSymbol]: setCount }) => () =>
+          setCount(count + 1),
+        decrement: ({ count, [setCountSymbol]: setCount }) => () =>
+          setCount(count - 1),
+      })
+    )
+  )()
 
 function Something() {
-  const { count, increment, decrement } = useCount()
+  const {
+    counter: { count, increment, decrement },
+  } = useCount('counter')
 
   return (
     <div>

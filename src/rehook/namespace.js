@@ -1,5 +1,5 @@
 /**
- * @param {string} propName
+ * @param {string|symbol} propName
  * @param {Function} enhance
  * @returns {Object}
  */

@@ -4,8 +4,8 @@ const { useState, useMemo } = React
 
 /**
  *
- * @param {string} stateName
- * @param {string} stateUpdaterName
+ * @param {string|symbol} stateName
+ * @param {string|symbol} stateUpdaterName
  * @param {any} initialState
  */
 const withState = (stateName, stateUpdaterName, initialState) => props => {
