@@ -10,6 +10,7 @@ test('exports expected', () => {
     'flattenProp',
     'lifecycle',
     'mapProps',
+    'namespace',
     'pipe',
     'renameProp',
     'renameProps',
