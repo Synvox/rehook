@@ -2,15 +2,14 @@ import React from "react";
 
 /**
  * @param {Function} component
- * @param {Function} [deriveProps]
  * @returns {Object}
  */
-const rehook = (component, deriveProps = x => x) => {
+const catchRender = component => {
   const newComponent = props => {
     let result = null;
 
     try {
-      result = component(deriveProps(props));
+      result = component(props);
     } catch (e) {
       if (typeof e !== "object" || React.isValidElement(e)) result = e;
       else throw e;
@@ -25,4 +24,4 @@ const rehook = (component, deriveProps = x => x) => {
   return newComponent;
 };
 
-export default rehook;
+export default catchRender;

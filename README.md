@@ -27,9 +27,9 @@ _With Rehook_
 ```js
 import React from "react";
 
-import { rehook, withState, pipe, withHandlers } from "@synvox/rehook";
+import { withState, pipe, withHandlers } from "@synvox/rehook";
 
-const enhance = pipe(
+const useCount = pipe(
   withState("count", "setCount", 0),
   withHandlers({
     increment: ({ count, setCount }) => () => setCount(count + 1),
@@ -37,7 +37,9 @@ const enhance = pipe(
   })
 );
 
-function Something({ count, increment, decrement }) {
+function Something() {
+  const { count, increment, decrement } = useCount();
+
   return (
     <div>
       <button onClick={decrement}>-1</button>
@@ -47,7 +49,7 @@ function Something({ count, increment, decrement }) {
   );
 }
 
-export default rehook(Something, enhance);
+export default Something;
 ```
 
 _With Recompose_
@@ -84,7 +86,6 @@ Notice how subtle the changes are.
 
 _Full disclaimer: Most of these docs are modified from the Recompose docs._
 
-- [`rehook()`](#rehook-1)
 - [`pipe()`](#pipe)
 - [`mapProps()`](#mapprops)
 - [`withProps()`](#withprops)
@@ -100,18 +101,8 @@ _Full disclaimer: Most of these docs are modified from the Recompose docs._
 - [`branch()`](#branch)
 - [`renderComponent()`](#rendercomponent)
 - [`renderNothing()`](#rendernothing)
+- [`catchRender()`](#rehook-1)
 - [`lifecycle()`](#lifecycle)
-
-### `rehook()`
-
-```js
-rehook(
-  component: (props: Object) => ReactElement
-  ?enhancer: (props: Object) => Object
-): FunctionComponent
-```
-
-Accepts a function component and creates a function component and optionally runs props through a specified enhancer.
 
 ### `pipe()`
 
@@ -383,6 +374,8 @@ renderComponent(
 ): (props: Object) => Object
 ```
 
+Stops the function execution and renders a component. Use with `catchRender()`.
+
 > `renderComponent()` is a tricky enhancer to implement with hooks. 😔 It will `throw` a component to signal to `rehook()` that it should stop the function and render that component. This sometimes causes issues with hook’s positional state system. It is advised to use `renderComponent()` after stateful enhancers like `withState` and after effect handlers like `lifecycle`. React will throw an error if this is called too soon.
 
 This is useful in combination with another enhancer like `branch()`:
@@ -419,9 +412,9 @@ export default rehook(Post, enhance);
 renderNothing: (props: Object) => Object;
 ```
 
-An enhancer that always renders `null`.
+An enhancer that always renders `null`. Use with `catchRender()`.
 
-> `renderComponent()` is a tricky enhancer to implement with hooks. 😔 It will `throw` a component to signal to `rehook()` that it should stop the function and render that component. This sometimes causes issues with hook’s positional state system. It is advised to use `renderComponent()` after stateful enhancers like `withState` and after effect handlers like `lifecycle`. React will throw an error if this is called too soon.
+> `renderNothing()` is a tricky enhancer to implement with hooks. 😔 It will `throw` a component to signal to `rehook()` that it should stop the function and render that component. This sometimes causes issues with hook’s positional state system. It is advised to use `renderNothing()` after stateful enhancers like `withState` and after effect handlers like `lifecycle`. React will throw an error if this is called too soon.
 
 This is useful in combination with another helper that expects a higher-order component, like `branch()`:
 
@@ -444,6 +437,16 @@ const Post = ({ title, author, content }) => (
 
 export default rehook(Post, enhance);
 ```
+
+### `catchRender()`
+
+```js
+catchRender(
+  component: (props: Object) => ReactElement
+): FunctionComponent
+```
+
+If you use `renderComponent()` or `renderNothing()` wrap your function component with with `catchRender()`.
 
 ### `lifecycle()`
 
