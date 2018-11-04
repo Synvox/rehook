@@ -1,4 +1,5 @@
 # Rehook
+
 Rehook implements an API similar to [Recompose](https://github.com/acdlite/recompose), but using hooks.
 
 ```
@@ -6,20 +7,23 @@ npm i @synvox/rehook
 ```
 
 ## Explanation
+
 Hooks are a great idea and I want to migrate from Recompose to React hooks. React hooks can do _almost_ everything recompose can do, but without wrapping components in other components.
 
 ## Why is this a thing?
+
 Before Promises, JavaScript developers used a pattern called “error first callbacks”. Callbacks are flexible and easy to understand, but not composable. This lead to “the callback pyramid of doom” where callbacks were called in callbacks.
 
 When promises were introduced, suddenly developers were able to chain asynchronous code together with `.then()`. This was great and simplified asynchronous code. Callbacks still exist (and should) because they are often the best tool for the job. Promises are composable, but are more difficult to reason about than a single callback.
 
 Then the JavaScript community got `async/await`. It was like magic! Suddenly we could write asynchronous code imperatively, and it used promises under the hood. This was important because Promise based logic could be easily reused with `async/await`.
 
-*In React, we’re undergoing the same renaissance.* Higher Order Components are like Promises: easily composable, not easily understood. Render Props are like callbacks: understandable, flexible, not easily composable. React hooks are like `async/await`. Suddenly we can write understandable, composable logic and decouple reusable logic from components.
+_In React, we’re undergoing the same renaissance._ Higher Order Components are like Promises: easily composable, not easily understood. Render Props are like callbacks: understandable, flexible, not easily composable. React hooks are like `async/await`. Suddenly we can write understandable, composable logic and decouple reusable logic from components.
 
-There are tons of higher order component code written with Recompose, that could (and should) use hooks instead, but there is no migration plan. Luckily recompose in an implementation of functional mixins on React components. We can recreate this interface but use hooks instead of components. *This way you can use your existing Recompose enhancers as hooks*, similar to how you can use your existing Promise based code with async/await.
+There are tons of higher order component code written with Recompose, that could (and should) use hooks instead, but there is no migration plan. Luckily recompose in an implementation of functional mixins on React components. We can recreate this interface but use hooks instead of components. _This way you can use your existing Recompose enhancers as hooks_, similar to how you can use your existing Promise based code with async/await.
 
-*With Rehook*
+_With Rehook_
+
 ```js
 import React from "react";
 
@@ -34,7 +38,7 @@ const useCount = pipe(
 );
 
 function Something() {
-	const { count, increment, decrement } = useCount()
+  const { count, increment, decrement } = useCount();
 
   return (
     <div>
@@ -46,10 +50,10 @@ function Something() {
 }
 
 export default Something;
-
 ```
 
-*With Recompose*
+_With Recompose_
+
 ```js
 import React from "react";
 
@@ -79,33 +83,34 @@ export default enhance(Something);
 Notice how subtle the changes are.
 
 ## Docs
+
 _Full disclaimer: Most of these docs are modified from the Recompose docs._
 
-* [`pipe()`](#pipe)
-* [`mapProps()`](#mapprops)
-* [`withProps()`](#withprops)
-* [`withPropsOnChange()`](#withpropsonchange)
-* [`withHandlers()`](#withhandlers)
-* [`defaultProps()`](#defaultprops)
-* [`renameProp()`](#renameprop)
-* [`renameProps()`](#renameprops)
-* [`flattenProp()`](#flattenprop)
-* [`withState()`](#withstate)
-* [`withStateHandlers()`](#withstatehandlers)
-* [`withReducer()`](#withreducer)
-* [`branch()`](#branch)
-* [`renderComponent()`](#rendercomponent)
-* [`renderNothing()`](#rendernothing)
-* [`catchRender()`](#rehook-1)
-* [`lifecycle()`](#lifecycle)
+- [`pipe()`](#pipe)
+- [`mapProps()`](#mapprops)
+- [`withProps()`](#withprops)
+- [`withPropsOnChange()`](#withpropsonchange)
+- [`withHandlers()`](#withhandlers)
+- [`defaultProps()`](#defaultprops)
+- [`renameProp()`](#renameprop)
+- [`renameProps()`](#renameprops)
+- [`flattenProp()`](#flattenprop)
+- [`withState()`](#withstate)
+- [`withStateHandlers()`](#withstatehandlers)
+- [`withReducer()`](#withreducer)
+- [`branch()`](#branch)
+- [`renderComponent()`](#rendercomponent)
+- [`renderNothing()`](#rendernothing)
+- [`catchRender()`](#rehook-1)
+- [`lifecycle()`](#lifecycle)
 
 ### `pipe()`
+
 ```js
 pipe(...functions: Array<Function>): Function
 ```
 
 In recompose, you `compose` enhancers. In `rehook` each enhancer is a function that takes `props` and returns new `props`. Use `pipe` instead of `compose` to chain these together.
-
 
 ### `mapProps()`
 
@@ -128,7 +133,6 @@ withProps(
 Like `mapProps()`, except the newly created props are merged with the owner props.
 
 Instead of a function, you can also pass a props object directly. In this form, it is similar to `defaultProps()`, except the provided props take precedence over props from the owner.
-
 
 ### `withPropsOnChange()`
 
@@ -164,28 +168,29 @@ Usage example:
 
 ```js
 const useForm = pipe(
-  withState('value', 'updateValue', ''),
+  withState("value", "updateValue", ""),
   withHandlers({
     onChange: props => event => {
-      props.updateValue(event.target.value)
+      props.updateValue(event.target.value);
     },
     onSubmit: props => event => {
-      event.preventDefault()
-      submitForm(props.value)
+      event.preventDefault();
+      submitForm(props.value);
     }
   })
-)
+);
 
-function Form(){
-	const { value, onChange, onSubmit } = useForm()
+function Form() {
+  const { value, onChange, onSubmit } = useForm();
 
-	return (
-	  <form onSubmit={onSubmit}>
-	    <label>Value
-	      <input type="text" value={value} onChange={onChange} />
-	    </label>
-	  </form>
-	)
+  return (
+    <form onSubmit={onSubmit}>
+      <label>
+        Value
+        <input type="text" value={value} onChange={onChange} />
+      </label>
+    </form>
+  );
 }
 ```
 
@@ -233,11 +238,11 @@ Flattens a prop so that its fields are spread out into the props object.
 ```js
 const useProps = pipe(
   withProps({
-    object: { a: 'a', b: 'b' },
-    c: 'c'
+    object: { a: "a", b: "b" },
+    c: "c"
   }),
-  flattenProp('object')
-)
+  flattenProp("object")
+);
 
 // useProps() returns: { a: 'a', b: 'b', c: 'c', object: { a: 'a', b: 'b' } }
 ```
@@ -263,13 +268,13 @@ The first form accepts a function which maps the previous state value to a new s
 
 ```js
 const addCounting = pipe(
-  withState('counter', 'setCounter', 0),
+  withState("counter", "setCounter", 0),
   withHandlers({
     increment: ({ setCounter }) => () => setCounter(n => n + 1),
-    decrement: ({ setCounter }) => () =>  setCounter(n => n - 1),
+    decrement: ({ setCounter }) => () => setCounter(n => n - 1),
     reset: ({ setCounter }) => () => setCounter(0)
   })
-)
+);
 ```
 
 The second form accepts a single value, which is used as the new state.
@@ -282,11 +287,14 @@ An initial state value is required. It can be either the state value itself, or 
 
 ```js
 withStateHandlers(
-  initialState: Object | (props: Object) => any,
-  stateUpdaters: {
-    [key: string]: (state:Object, props:Object) => (...payload: any[]) => Object
-  }
-)
+  (initialState: Object | ((props: Object) => any)),
+  (stateUpdaters: {
+    [key: string]: (
+      state: Object,
+      props: Object
+    ) => (...payload: any[]) => Object
+  })
+);
 ```
 
 Passes state object properties and immutable updater functions
@@ -298,33 +306,33 @@ Returning undefined does not cause a component rerender.
 Example:
 
 ```js
-  const useCounter = withStateHandlers(
-    ({ initialCounter = 0 }) => ({
-      counter: initialCounter,
+const useCounter = withStateHandlers(
+  ({ initialCounter = 0 }) => ({
+    counter: initialCounter
+  }),
+  {
+    incrementOn: ({ counter }) => value => ({
+      counter: counter + value
     }),
-    {
-      incrementOn: ({ counter }) => (value) => ({
-        counter: counter + value,
-      }),
-      decrementOn: ({ counter }) => (value) => ({
-        counter: counter - value,
-      }),
-      resetCounter: (_, { initialCounter = 0 }) => () => ({
-        counter: initialCounter,
-      }),
-    }
-  )
+    decrementOn: ({ counter }) => value => ({
+      counter: counter - value
+    }),
+    resetCounter: (_, { initialCounter = 0 }) => () => ({
+      counter: initialCounter
+    })
+  }
+);
 
 function Counter() {
-  const { counter, incrementOn, decrementOn, resetCounter } = useCounter()
+  const { counter, incrementOn, decrementOn, resetCounter } = useCounter();
 
-	return (
-	  <div>
-	    <Button onClick={() => incrementOn(2)}>Inc</Button>
-	    <Button onClick={() => decrementOn(3)}>Dec</Button>
-	    <Button onClick={resetCounter}>Reset</Button>
-	  </div>
-	)
+  return (
+    <div>
+      <Button onClick={() => incrementOn(2)}>Inc</Button>
+      <Button onClick={() => decrementOn(3)}>Dec</Button>
+      <Button onClick={resetCounter}>Reset</Button>
+    </div>
+  );
 }
 ```
 
@@ -371,7 +379,7 @@ renderComponent(
 
 Stops the function execution and renders a component. Use with `catchRender()`.
 
-> `renderComponent()` is a tricky enhancer to implement with hooks. 😔 It will `throw` a component to signal to `rehook()` that it should stop the function and render that component. This sometimes causes issues with hook’s positional state system. It is advised to use `renderComponent()` after stateful enhancers like `withState` and after effect handlers like `lifecycle `. React will throw an error if this is called too soon.
+> `renderComponent()` is a tricky enhancer to implement with hooks. 😔 It will `throw` a component to signal to `rehook()` that it should stop the function and render that component. This sometimes causes issues with hook’s positional state system. It is advised to use `renderComponent()` after stateful enhancers like `withState` and after effect handlers like `lifecycle`. React will throw an error if this is called too soon.
 
 This is useful in combination with another enhancer like `branch()`:
 
@@ -409,7 +417,7 @@ export default Post
 ### `renderNothing()`
 
 ```js
-renderNothing: (props: Object) => Object
+renderNothing: (props: Object) => Object;
 ```
 
 An enhancer that always renders `null`. Use with `catchRender()`.
@@ -421,34 +429,31 @@ This is useful in combination with another helper that expects a higher-order co
 ```js
 // `hasNoData()` is a function that returns true if the component has
 // no data
-const hideIfNoData = hasNoData =>
-  branch(
-    hasNoData,
-    renderNothing
-  )
+const hideIfNoData = hasNoData => branch(hasNoData, renderNothing);
 
 // Now use the `hideIfNoData()` helper to hide any base component
 const useHidden = hideIfNoData(
   props => !(props.title && props.author && props.content)
-)
+);
 
-const Post = catchRender((props) => {
-  useHidden(props)
-  const { title, author, content } = props
+const Post = catchRender(props => {
+  useHidden(props);
+  const { title, author, content } = props;
 
- 	return (
-	  <article>
-	    <h1>{title}</h1>
-	    <h2>By {author.name}</h2>
-	    <div>{content}</div>
-	  </article>
-	)
-})
+  return (
+    <article>
+      <h1>{title}</h1>
+      <h2>By {author.name}</h2>
+      <div>{content}</div>
+    </article>
+  );
+});
 
-export default Post
+export default Post;
 ```
 
 ### `catchRender()`
+
 ```js
 catchRender(
   component: (props: Object) => ReactElement
@@ -465,25 +470,30 @@ lifecycle(
 ): (props: Object) => Object
 ```
 
-Lifecycle supports `componentDidMount`, `componentWillUnmount`, `componentDidUpdate`. 
+Lifecycle supports `componentDidMount`, `componentWillUnmount`, `componentDidUpdate`.
 
 Any state changes made in a lifecycle method, by using `setState`, will be merged with props.
 
 Example:
+
 ```js
 const usePosts = lifecycle({
   componentDidMount() {
     fetchPosts().then(posts => {
       this.setState({ posts });
-    })
+    });
   }
 });
 
-function PostsList(){
-	const { posts=[] } = usePosts()
+function PostsList() {
+  const { posts = [] } = usePosts();
 
   return (
-    <ul>{posts.map(p => <li>{p.title}</li>)}</ul>
-  )
+    <ul>
+      {posts.map(p => (
+        <li>{p.title}</li>
+      ))}
+    </ul>
+  );
 }
 ```
