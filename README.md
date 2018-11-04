@@ -1,5 +1,4 @@
 # Rehook
-[![Build Status](https://travis-ci.org/Synvox/rehook.svg?branch=master)](https://travis-ci.org/Synvox/rehook)
 
 Rehook implements an API similar to [Recompose](https://github.com/acdlite/recompose), but using hooks.
 
@@ -9,9 +8,19 @@ npm i @synvox/rehook
 
 ## Explanation
 
-With Higher order components, we develop `enhancer`s that represent logic in a smart component. These enhancers become functional mixins that act on the props object. This makes it relatively painless to isolate functionality to an `enhancer` and apply it within a `compose` call. _Composable software ftw!_
+Hooks are a great idea and I want to migrate from Recompose to React hooks. React hooks can do _almost_ everything recompose can do, but without wrapping components in other components.
 
-Higher order components have one major flaw: higher order components result in many more React components than necessary. Hooks fix this by enabling developers to write functional mixins that do not create extra React components. Rehook turns your recompose enhancers into hooks with minimal changes.
+## Why is this a thing?
+
+Before Promises, JavaScript developers used a pattern called “error first callbacks”. Callbacks are flexible and easy to understand, but not composable. This lead to “the callback pyramid of doom” where callbacks were called in callbacks.
+
+When promises were introduced, suddenly developers were able to chain asynchronous code together with `.then()`. This was great and simplified asynchronous code. Callbacks still exist (and should) because they are often the best tool for the job. Promises are composable, but are more difficult to reason about than a single callback.
+
+Then the JavaScript community got `async/await`. It was like magic! Suddenly we could write asynchronous code imperatively, and it used promises under the hood. This was important because Promise based logic could be easily reused with `async/await`.
+
+_In React, we’re undergoing the same renaissance._ Higher Order Components are like Promises: easily composable, not easily understood. Render Props are like callbacks: understandable, flexible, not easily composable. Reach hooks are like `async/await`. Suddenly we can write understandable, composable logic and decouple reusable logic from components.
+
+There are tons of higher order component code written with Recompose, that could (and should) use hooks instead, but there is no migration plan. Luckily recompose in an implementation of functional mixins on React components. We can recreate this interface but use hooks instead of components. _This enables the usage your existing Recompose enhancers as hooks_, similar to how you can use your existing Promise based code with async/await.
 
 _With Rehook_
 
