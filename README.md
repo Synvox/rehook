@@ -18,7 +18,7 @@ When promises were introduced, suddenly developers were able to chain asynchrono
 
 Then the JavaScript community got `async/await`. It was like magic! Suddenly we could write asynchronous code imperatively, and it used promises under the hood. This was important because Promise based logic could be easily reused with `async/await`.
 
-_In React, we’re undergoing the same renaissance._ Higher Order Components are like Promises: easily composable, not easily understood. Render Props are like callbacks: understandable, flexible, not easily composable. Reach hooks are like `async/await`. Suddenly we can write understandable, composable logic and decouple reusable logic from components.
+_In React, we’re undergoing the same renaissance._ Higher Order Components are like Promises: easily composable, not easily understood. Render Props are like callbacks: understandable, flexible, not easily composable. React hooks are like `async/await`. Suddenly we can write understandable, composable logic and decouple reusable logic from components.
 
 There are tons of higher order component code written with Recompose, that could (and should) use hooks instead, but there is no migration plan. Luckily recompose in an implementation of functional mixins on React components. We can recreate this interface but use hooks instead of components. _This enables the usage your existing Recompose enhancers as hooks_, similar to how you can use your existing Promise based code with async/await.
 
