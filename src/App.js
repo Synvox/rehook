@@ -1,7 +1,10 @@
-import React from "react";
-import { rehook, withState, pipe, withHandlers } from "./rehook";
+// @TODO build a demo site.
 
-const enhancer = pipe(
+import React from "react";
+
+import { withState, pipe, withHandlers } from "./rehook";
+
+const useCount = pipe(
   withState("count", "setCount", 0),
   withHandlers({
     increment: ({ count, setCount }) => () => setCount(count + 1),
@@ -9,19 +12,16 @@ const enhancer = pipe(
   })
 );
 
-/**
- * @param {{children:any}} props
- */
-function Something({ children }) {
-  const { count, increment, decrement } = enhancer();
+function Something() {
+  const { count, increment, decrement } = useCount();
+
   return (
     <div>
       <button onClick={decrement}>-1</button>
       {count}
       <button onClick={increment}>+1</button>
-      {children}
     </div>
   );
 }
 
-export default rehook(Something);
+export default Something;
