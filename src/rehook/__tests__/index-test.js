@@ -2,13 +2,13 @@ import * as exported from "../";
 
 test("exports expected", () => {
   expect(Object.keys(exported)).toEqual([
-    "rehook",
     "branch",
-    "pipe",
+    "catchRender",
     "defaultProps",
     "flattenProp",
     "lifecycle",
     "mapProps",
+    "pipe",
     "renameProp",
     "renameProps",
     "renderComponent",
