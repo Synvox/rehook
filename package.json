@@ -40,7 +40,7 @@
     "build": "react-scripts build",
     "test:eslint": "eslint src --fix",
     "test:jest": "react-scripts test",
-    "test": "CI=true npm run test:eslint && CI=true npm run test:jest",
+    "test": "CI=true npm run test:eslint && CI=true npm run test:jest --findRelatedTests",
     "eject": "react-scripts eject",
     "build:bundle": "microbundle",
     "build:types": "jsdoc -t node_modules/@otris/jsdoc-tsd -r ./src/rehook -d dist/rehook.d.ts",
