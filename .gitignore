@@ -24,3 +24,6 @@ yarn-error.log*
 
 dist
 build
+
+# microbundle requires yarn :( for jsx
+package-lock.json

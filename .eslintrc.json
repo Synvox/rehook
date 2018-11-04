@@ -1,0 +1,32 @@
+{
+  "extends": [
+    "standard",
+    "prettier",
+    "plugin:react/recommended",
+    "prettier/react",
+    "prettier/standard",
+    "plugin:jsx-a11y/recommended"
+  ],
+  "plugins": ["babel", "react", "prettier", "standard", "jsx-a11y"],
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "env": {
+    "es6": true,
+    "node": true
+  },
+  "rules": {
+    "prettier/prettier": "error",
+    "react/display-name": [0],
+    "no-unused-vars": [2, { "args": "after-used", "argsIgnorePattern": "^_" }]
+  },
+  "globals": {
+    "FormData": true,
+    "fetch": true,
+    "Event": true
+  }
+}
