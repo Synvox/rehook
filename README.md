@@ -167,7 +167,7 @@ This allows the handler to access the current props via closure, without needing
 Usage example:
 
 ```js
-const enhance = pipe(
+const useForm = pipe(
   withState("value", "updateValue", ""),
   withHandlers({
     onChange: props => event => {
@@ -180,16 +180,18 @@ const enhance = pipe(
   })
 );
 
-const Component = ({ value, onChange, onSubmit }) => {
-  <form onSubmit={onSubmit}>
-    <label>
-      Value
-      <input type="text" value={value} onChange={onChange} />
-    </label>
-  </form>;
-};
+function Form() {
+  const { value, onChange, onSubmit } = useForm();
 
-const Form = rehook(Component, enhance);
+  return (
+    <form onSubmit={onSubmit}>
+      <label>
+        Value
+        <input type="text" value={value} onChange={onChange} />
+      </label>
+    </form>
+  );
+}
 ```
 
 ### `defaultProps()`
@@ -234,16 +236,15 @@ flattenProp(
 Flattens a prop so that its fields are spread out into the props object.
 
 ```js
-const enhance = pipe(
+const useProps = pipe(
   withProps({
     object: { a: "a", b: "b" },
     c: "c"
   }),
   flattenProp("object")
 );
-const Abc = rehook(BaseComponent, enhance);
 
-// Base component receives props: { a: 'a', b: 'b', c: 'c', object: { a: 'a', b: 'b' } }
+// useProps() returns: { a: 'a', b: 'b', c: 'c', object: { a: 'a', b: 'b' } }
 ```
 
 ### `withState()`
@@ -305,7 +306,7 @@ Returning undefined does not cause a component rerender.
 Example:
 
 ```js
-const enhance = withStateHandlers(
+const useCounter = withStateHandlers(
   ({ initialCounter = 0 }) => ({
     counter: initialCounter
   }),
@@ -322,15 +323,17 @@ const enhance = withStateHandlers(
   }
 );
 
-const Component = ({ counter, incrementOn, decrementOn, resetCounter }) => (
-  <div>
-    <Button onClick={() => incrementOn(2)}>Inc</Button>
-    <Button onClick={() => decrementOn(3)}>Dec</Button>
-    <Button onClick={resetCounter}>Reset</Button>
-  </div>
-);
+function Counter() {
+  const { counter, incrementOn, decrementOn, resetCounter } = useCounter();
 
-const Counter = rehook(Component, enhance);
+  return (
+    <div>
+      <Button onClick={() => incrementOn(2)}>Inc</Button>
+      <Button onClick={() => decrementOn(3)}>Dec</Button>
+      <Button onClick={resetCounter}>Reset</Button>
+    </div>
+  );
+}
 ```
 
 ### `withReducer()`
@@ -387,23 +390,28 @@ const spinnerWhileLoading = isLoading =>
   branch(
     isLoading,
     renderComponent(Spinner) // `Spinner` is a React component
-  );
+  )
 
 // Now use the `spinnerWhileLoading()` helper to add a loading spinner to any
 // base component
-const enhance = spinnerWhileLoading(
+const break = spinnerWhileLoading(
   props => !(props.title && props.author && props.content)
-);
+)
 
-const Post = ({ title, author, content }) => (
-  <article>
-    <h1>{title}</h1>
-    <h2>By {author.name}</h2>
-    <div>{content}</div>
-  </article>
-);
+const Post = catchRender((props) => {
+  useSpinner(props)
+  const { title, author, content } = props
 
-export default rehook(Post, enhance);
+ 	return (
+	  <article>
+	    <h1>{title}</h1>
+	    <h2>By {author.name}</h2>
+	    <div>{content}</div>
+	  </article>
+	)
+})
+
+export default Post
 ```
 
 ### `renderNothing()`
@@ -424,18 +432,24 @@ This is useful in combination with another helper that expects a higher-order co
 const hideIfNoData = hasNoData => branch(hasNoData, renderNothing);
 
 // Now use the `hideIfNoData()` helper to hide any base component
-const enhance = hideIfNoData(
+const useHidden = hideIfNoData(
   props => !(props.title && props.author && props.content)
 );
-const Post = ({ title, author, content }) => (
-  <article>
-    <h1>{title}</h1>
-    <h2>By {author.name}</h2>
-    <div>{content}</div>
-  </article>
-);
 
-export default rehook(Post, enhance);
+const Post = catchRender(props => {
+  useHidden(props);
+  const { title, author, content } = props;
+
+  return (
+    <article>
+      <h1>{title}</h1>
+      <h2>By {author.name}</h2>
+      <div>{content}</div>
+    </article>
+  );
+});
+
+export default Post;
 ```
 
 ### `catchRender()`
@@ -463,15 +477,7 @@ Any state changes made in a lifecycle method, by using `setState`, will be merge
 Example:
 
 ```js
-const PostsList = ({ posts }) => (
-  <ul>
-    {posts.map(p => (
-      <li>{p.title}</li>
-    ))}
-  </ul>
-);
-
-const enhance = lifecycle({
+const usePosts = lifecycle({
   componentDidMount() {
     fetchPosts().then(posts => {
       this.setState({ posts });
@@ -479,5 +485,15 @@ const enhance = lifecycle({
   }
 });
 
-export default rehook(PostsList, enhance);
+function PostsList() {
+  const { posts = [] } = usePosts();
+
+  return (
+    <ul>
+      {posts.map(p => (
+        <li>{p.title}</li>
+      ))}
+    </ul>
+  );
+}
 ```
