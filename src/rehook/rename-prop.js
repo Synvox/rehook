@@ -3,7 +3,7 @@
  * @param {string|symbol} b
  * @returns {Object}
  */
-const renameProp = (a, b) => ({ [a]: prop, ...props }) => ({
+const renameProp = (a, b) => ({ [a]: prop, ...props } = {}) => ({
   ...props,
   [b]: prop,
 })

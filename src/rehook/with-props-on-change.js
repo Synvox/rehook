@@ -18,7 +18,7 @@ function usePrevious(value) {
  * @param {Function} createProps
  * @returns {Object}
  */
-const withPropsOnChange = (shouldMapOrKeys, createProps) => props => {
+const withPropsOnChange = (shouldMapOrKeys, createProps) => (props = {}) => {
   const previousProps = usePrevious(props)
 
   const keys = Array.isArray(shouldMapOrKeys)

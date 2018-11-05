@@ -3,7 +3,7 @@
  * @param {Function} enhance
  * @returns {Object}
  */
-const namespace = (propName, enhance) => props => ({
+const namespace = (propName, enhance) => (props = {}) => ({
   ...props,
   [propName]: enhance(props)(),
 })

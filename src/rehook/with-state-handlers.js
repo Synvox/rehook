@@ -8,7 +8,7 @@ const { useReducer, useMemo } = React
  * @param {Object} handlers
  * @returns {Object}
  */
-const withStateHandlers = (initialValue, handlers) => props => {
+const withStateHandlers = (initialValue, handlers) => (props = {}) => {
   const actionTypes = Object.keys(handlers)
 
   const reducer = (state, action) => {

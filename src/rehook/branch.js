@@ -13,7 +13,7 @@ const { useMemo } = React
  * @param {Function} right
  * @returns {Function}
  */
-const branch = (condition, left, right = x => x) => props => {
+const branch = (condition, left, right = x => x) => (props = {}) => {
   const conditionResult = useMemo(() => condition(props), [])
 
   return conditionResult ? left(props) : right(props)

@@ -16,7 +16,7 @@ function usePrevious(value) {
  * @param {Object} spec
  * @returns {Object}
  */
-const lifecycle = spec => props => {
+const lifecycle = spec => (props = {}) => {
   const [state, setStateRaw] = useState({})
   const setState = update => {
     setStateRaw({

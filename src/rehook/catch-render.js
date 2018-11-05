@@ -5,7 +5,7 @@ import React from 'react'
  * @returns {Object}
  */
 const catchRender = component => {
-  const newComponent = props => {
+  const newComponent = (props = {}) => {
     let result = null
 
     try {

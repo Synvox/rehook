@@ -7,7 +7,7 @@ const { useMemo } = React
  * @param {Object} handlers
  * @returns {Object}
  */
-const withHandlers = handlers => props => {
+const withHandlers = handlers => (props = {}) => {
   const realHandlers = useMemo(
     () => (typeof handlers === 'function' ? handlers(props) : handlers),
     []

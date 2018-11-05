@@ -8,7 +8,9 @@ const { useState, useMemo } = React
  * @param {string|symbol} stateUpdaterName
  * @param {any} initialState
  */
-const withState = (stateName, stateUpdaterName, initialState) => props => {
+const withState = (stateName, stateUpdaterName, initialState) => (
+  props = {}
+) => {
   const [state, update] = useState(
     typeof initialState === 'function'
       ? useMemo(() => initialState(props), [])

@@ -2,7 +2,7 @@
  * @param {Object} propMap
  * @returns {Object}
  */
-const renameProps = propMap => props => ({
+const renameProps = propMap => (props = {}) => ({
   // Remove renamed props
   ...Object.entries(props)
     .filter(([key]) => !(key in propMap))
