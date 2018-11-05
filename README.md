@@ -2,17 +2,21 @@
 
 [![Build Status](https://travis-ci.org/Synvox/rehook.svg?branch=master)](https://travis-ci.org/Synvox/rehook)
 
-Rehook implements an API similar to [Recompose](https://github.com/acdlite/recompose), but using hooks.
+Rehook implements an API similar to [Recompose](https://github.com/acdlite/recompose), but using React Hooks.
+
+> Note, React Hooks are in alpha. Refer to the official documentation: [React Hooks](https://reactjs.org/docs/hooks-intro.html)
 
 ```
 npm i @synvox/rehook
 ```
 
-## Explanation
+## What is Rehook?
 
-Hooks are a great idea and I want to migrate from Recompose to React hooks. React hooks can do _almost_ everything recompose can do, but without wrapping components in other components.
+Hooks are a great idea and I want to migrate my enhancers from Recompose to React Hooks.
 
-## Why is this a thing?
+React Hooks can do most of what Recompose can do, but without wrapping components in other components. This is a huge win! But what happens to all the code written to use recompose? Rehook is a migration strategy from higher order components to hooks.
+
+## Backwards Compatibility
 
 Before Promises, JavaScript developers used a pattern called “error first callbacks”. Callbacks are flexible and easy to understand, but not composable. This lead to “the callback pyramid of doom” where callbacks were called in callbacks.
 
@@ -20,11 +24,11 @@ When promises were introduced, suddenly developers were able to chain asynchrono
 
 Then the JavaScript community got `async/await`. It was like magic! Suddenly we could write asynchronous code imperatively, and it used promises under the hood. This was important because Promise based logic could be easily reused with `async/await`.
 
-**In React, we’re undergoing the same renaissance.** Higher Order Components are like Promises: easily composable, not easily understood. Render Props are like callbacks: understandable, flexible, not easily composable. React hooks are like `async/await`. Suddenly we can write understandable, composable logic and decouple reusable logic from components.
+_In React, we’re undergoing a similar renaissance._ Higher Order Components are like Promises: easily composable, not easily understood. Render Props are like callbacks: understandable, flexible, not easily composable. React Hooks are like `async/await`. Suddenly we can write understandable, composable logic and decouple reusable logic from components.
 
-There are tons of higher order component code written with Recompose, that could (and should) use hooks instead, but there is no migration plan. Luckily recompose in an implementation of functional mixins on React components. We can recreate this interface but use hooks instead of components. **This way you can use your existing Recompose enhancers as hooks**, similar to how you can use your existing Promise based code with async/await.
+There are tons of higher order component code written with Recompose, that could (and should) use hooks instead, but there is no migration plan. Luckily recompose in an implementation of functional mixins on React components. We can recreate this interface but use hooks instead of components. _This way you can use your existing Recompose enhancers as hooks_, similar to how you can use your existing Promise based code with async/await.
 
-**With Rehook**
+_With Rehook_
 
 ```js
 import React from 'react'
@@ -39,7 +43,7 @@ const useCount = pipe(
   })
 )
 
-function Something() {
+function Counter() {
   const { count, increment, decrement } = useCount()
 
   return (
@@ -51,10 +55,10 @@ function Something() {
   )
 }
 
-export default Something
+export default Counter
 ```
 
-**With Recompose**
+_With Recompose_
 
 ```js
 import React from 'react'
@@ -69,7 +73,7 @@ const enhance = compose(
   })
 )
 
-function Something({ count, increment, decrement }) {
+function Counter({ count, increment, decrement }) {
   return (
     <div>
       <button onClick={decrement}>-1</button>
@@ -79,10 +83,43 @@ function Something({ count, increment, decrement }) {
   )
 }
 
-export default enhance(Something)
+export default enhance(Counter)
 ```
 
 Notice how subtle the changes are.
+
+### Smart/Presentational Components:
+
+In Recompose, you are required to pass all props through each component until it reaches your presentational component. This is not the case with Rehook, but you may choose run all your props through an enhancer using `pipe()`. This will look more familiar to those who have used recompose before.
+
+```js
+import React from 'react'
+
+import { withState, pipe, withHandlers } from '@synvox/rehook'
+
+const enhance = pipe(
+  withState('count', 'setCount', 0),
+  withHandlers({
+    increment: ({ count, setCount }) => () => setCount(count + 1),
+    decrement: ({ count, setCount }) => () => setCount(count - 1),
+  })
+)
+
+function Counter({ count, increment, decrement }) {
+  return (
+    <div>
+      <button onClick={decrement}>-1</button>
+      {count}
+      <button onClick={increment}>+1</button>
+    </div>
+  )
+}
+
+export default pipe(
+  enhance,
+  Counter
+)
+```
 
 ## Docs
 
@@ -93,6 +130,7 @@ _Full disclaimer: Most of these docs are modified from the Recompose docs._
 - [`withProps()`](#withprops)
 - [`withPropsOnChange()`](#withpropsonchange)
 - [`withHandlers()`](#withhandlers)
+- [`namespace()`](#withhandlers)
 - [`defaultProps()`](#defaultprops)
 - [`renameProp()`](#renameprop)
 - [`renameProps()`](#renameprops)
@@ -184,6 +222,54 @@ const useForm = pipe(
 
 function Form() {
   const { value, onChange, onSubmit } = useForm()
+
+  return (
+    <form onSubmit={onSubmit}>
+      <label>
+        Value
+        <input type="text" value={value} onChange={onChange} />
+      </label>
+    </form>
+  )
+}
+```
+
+### `namespace()`
+
+```js
+namespace(
+  namespaceKey: string | symbol,
+  createProps: (ownerProps: Object) => () => Object
+): (props: Object) => Object
+```
+
+The namespace function allows you to scope an enhancer at a key. It does the opposite of `flattenProp()`, by assigning the result of a call to a key specified by `namespaceKey` on the props object.
+
+Usage Example:
+
+```js
+const useForm = pipe(
+  withState('value', 'updateValue', ''),
+  namespace('handlers', parentProps =>
+    pipe(
+      withHandlers({
+        onChange: props => event => {
+          parentProps.updateValue(event.target.value)
+        },
+        onSubmit: props => event => {
+          event.preventDefault()
+          submitForm(parentProps.value)
+        },
+      })
+    )
+  )
+)
+
+function Form() {
+  const {
+    value,
+    handlers: { onChange, onSubmit },
+  } = useForm()
 
   return (
     <form onSubmit={onSubmit}>
@@ -498,4 +584,25 @@ function PostsList() {
     </ul>
   )
 }
+```
+
+### Test Utility:
+
+Rehook also provides a test utility for testing enhancers. This makes writing tests easy and readable. This depends on `enzyme`.
+
+Usage Example:
+
+```js
+import testEnhancer from '@synvox/rehook/test-utils'
+
+// Somehow import your enhancer:
+const enhancer = withState('state', 'setState', 0)
+
+test('with state', () => {
+  const getProps = testEnhancer(enhancer)
+
+  expect(getProps().state).toEqual(0)
+  getProps().setState(1)
+  expect(getProps().state).toEqual(1)
+})
 ```
