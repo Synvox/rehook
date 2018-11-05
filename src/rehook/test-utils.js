@@ -1,4 +1,3 @@
-// These are included in the bundle so consumers can use these utilities too
 import React from 'react'
 import { mount } from 'enzyme'
 
@@ -10,7 +9,7 @@ export default function(enhancer, propsIn) {
     return null
   }
 
-  mount(<Component {...propsIn} />)
+  mount(React.createElement(Component, propsIn))
 
   return () => propsOut
 }

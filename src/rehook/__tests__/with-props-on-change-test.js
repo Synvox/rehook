@@ -1,6 +1,6 @@
 /* eslint-env jest */
 
-import testUtil from '../test-util'
+import testUtil from '../test-utils'
 import pipe from '../pipe'
 import withState from '../with-state'
 import withPropsOnChange from '../with-props-on-change'

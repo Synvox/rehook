@@ -1,6 +1,6 @@
 /* eslint-env jest */
 
-import testUtil from '../test-util'
+import testUtil from '../test-utils'
 import withProps from '../with-props'
 
 test('maps props', () => {

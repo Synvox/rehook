@@ -1,6 +1,6 @@
 /* eslint-env jest */
 
-import testUtil from '../test-util'
+import testUtil from '../test-utils'
 import branch from '../branch'
 import withProps from '../with-props'
 

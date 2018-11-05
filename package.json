@@ -42,7 +42,9 @@
     "test:jest": "react-scripts test",
     "test": "CI=true npm run test:eslint && CI=true npm run test:jest --findRelatedTests",
     "eject": "react-scripts eject",
-    "build:bundle": "microbundle",
+    "build:bundle": "npm run build:bundle:main && npm run build:bundle:test-utils",
+    "build:bundle:main": "microbundle",
+    "build:bundle:test-utils": "microbundle build -i src/rehook/test-utils.js -o test-utils/index.js --external enzyme",
     "build:types": "jsdoc -t node_modules/@otris/jsdoc-tsd -r ./src/rehook -d dist/rehook.d.ts",
     "prepublish": "npm run build:bundle && npm run build:types"
   },

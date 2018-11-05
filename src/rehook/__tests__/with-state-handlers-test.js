@@ -1,6 +1,6 @@
 /* eslint-env jest */
 
-import testUtil from '../test-util'
+import testUtil from '../test-utils'
 import withStateHandlers from '../with-state-handlers'
 
 test('with state handlers', () => {
