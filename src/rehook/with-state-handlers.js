@@ -12,7 +12,10 @@ const withStateHandlers = (initialValue, handlers) => (props = {}) => {
   const actionTypes = Object.keys(handlers)
 
   const reducer = (state, action) => {
-    return { ...state, ...handlers[action.type](state, props)(action.payload) }
+    return {
+      ...state,
+      ...handlers[action.type](state, props)(...action.payload),
+    }
   }
 
   const [state, dispatch] = useReducer(
@@ -25,7 +28,7 @@ const withStateHandlers = (initialValue, handlers) => (props = {}) => {
   const boundHandlers = actionTypes.reduce(
     (obj, type) =>
       Object.assign(obj, {
-        [type]: payload => {
+        [type]: (...payload) => {
           if (payload !== undefined) dispatch({ type, payload })
         },
       }),
