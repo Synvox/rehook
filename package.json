@@ -1,10 +1,9 @@
 {
   "name": "@synvox/rehook",
   "public": true,
-  "version": "0.0.12",
+  "version": "0.0.13",
   "main": "dist/rehook.js",
   "umd:main": "dist/rehook.umd.js",
-  "module": "dist/rehook.mjs",
   "source": "src/rehook/index.js",
   "types": "dist/rehook.d.ts",
   "devDependencies": {
@@ -29,7 +28,13 @@
     "prettier": "1.14.3",
     "react": "^16.7.0-alpha.0",
     "react-dom": "^16.7.0-alpha.0",
-    "react-scripts": "2.1.0"
+    "react-scripts": "2.1.0",
+    "rollup": "^0.67.1",
+    "rollup-plugin-babel": "^4.0.3",
+    "rollup-plugin-commonjs": "^9.2.0",
+    "rollup-plugin-node-resolve": "^3.4.0",
+    "rollup-plugin-replace": "^2.1.0",
+    "rollup-plugin-uglify": "^6.0.0"
   },
   "peerDependencies": {
     "react": "^16.7.0-alpha.0",
@@ -42,9 +47,7 @@
     "test:jest": "react-scripts test",
     "test": "CI=true npm run test:eslint && CI=true npm run test:jest --findRelatedTests",
     "eject": "react-scripts eject",
-    "build:bundle": "npm run build:bundle:main && npm run build:bundle:test-utils",
-    "build:bundle:main": "microbundle",
-    "build:bundle:test-utils": "microbundle build -i src/rehook/test-utils.js -o test-utils/index.js --external enzyme",
+    "build:bundle": "NODE_ENV='production' rollup --config rollup.config.js",
     "build:types": "jsdoc -t node_modules/@otris/jsdoc-tsd -r ./src/rehook -d dist/rehook.d.ts",
     "prepublish": "npm run build:bundle && npm run build:types"
   },
