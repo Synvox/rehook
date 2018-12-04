@@ -5,7 +5,7 @@
  * @param right
  * @returns
  */
-declare function branch(
+export function branch(
   condition: () => void,
   left: () => void,
   right: () => void
@@ -16,35 +16,35 @@ declare function branch(
  * @param component
  * @returns
  */
-declare function catchRender(component: () => void): object
+export function catchRender(component: () => void): object
 
 /**
  *
  * @param defaultProps
  * @returns
  */
-declare function defaultProps(defaultProps: object): object
+export function defaultProps(defaultProps: object): object
 
 /**
  *
  * @param propName
  * @returns
  */
-declare function flattenProp(propName: string | symbol): object
+export function flattenProp(propName: string | symbol): object
 
 /**
  *
  * @param spec
  * @returns
  */
-declare function lifecycle(spec: object): object
+export function lifecycle(spec: object): object
 
 /**
  *
  * @param fn
  * @returns
  */
-declare function mapProps(fn: () => void): object
+export function mapProps(fn: () => void): object
 
 /**
  *
@@ -52,7 +52,7 @@ declare function mapProps(fn: () => void): object
  * @param enhance
  * @returns
  */
-declare function namespace(
+export function namespace(
   propName: string | symbol,
   enhance: () => void
 ): object
@@ -62,7 +62,7 @@ declare function namespace(
  * @param fns
  * @returns
  */
-declare function pipe(...fns: any[]): object
+export function pipe(...fns: () => void[]): object
 
 /**
  *
@@ -70,34 +70,34 @@ declare function pipe(...fns: any[]): object
  * @param b
  * @returns
  */
-declare function renameProp(a: string | symbol, b: string | symbol): object
+export function renameProp(a: string | symbol, b: string | symbol): object
 
 /**
  *
  * @param propMap
  * @returns
  */
-declare function renameProps(propMap: object): object
+export function renameProps(propMap: object): object
 
 /**
  *
  * @param comp
  * @returns
  */
-declare function renderComponent(comp: any): object
+export function renderComponent(comp: any): object
 
 /**
  *
  * @returns
  */
-declare function renderNothing(): object
+export function renderNothing(): object
 
 /**
  *
  * @param handlers
  * @returns
  */
-declare function withHandlers(handlers: object): object
+export function withHandlers(handlers: object): object
 
 /**
  *
@@ -105,7 +105,7 @@ declare function withHandlers(handlers: object): object
  * @param createProps
  * @returns
  */
-declare function withPropsOnChange(
+export function withPropsOnChange(
   shouldMapOrKeys: any,
   createProps: () => void
 ): object
@@ -114,7 +114,7 @@ declare function withPropsOnChange(
  *
  * @param fn
  */
-declare function withProps(fn: () => void | object): void
+export function withProps(fn: () => void | object): void
 
 /**
  *
@@ -123,7 +123,7 @@ declare function withProps(fn: () => void | object): void
  * @param reducer
  * @param initialValue
  */
-declare function withReducer(
+export function withReducer(
   stateName: string | symbol,
   dispatchName: string | symbol,
   reducer: () => void,
@@ -136,7 +136,7 @@ declare function withReducer(
  * @param handlers
  * @returns
  */
-declare function withStateHandlers(initialValue: any, handlers: object): object
+export function withStateHandlers(initialValue: any, handlers: object): object
 
 /**
  *
@@ -144,7 +144,7 @@ declare function withStateHandlers(initialValue: any, handlers: object): object
  * @param stateUpdaterName
  * @param initialState
  */
-declare function withState(
+export function withState(
   stateName: string | symbol,
   stateUpdaterName: string | symbol,
   initialState: any
