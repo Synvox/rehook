@@ -3,12 +3,16 @@ import resolve from 'rollup-plugin-node-resolve'
 import commonjs from 'rollup-plugin-commonjs'
 import babel from 'rollup-plugin-babel'
 import copy from 'rollup-plugin-copy'
+import cleaner from 'rollup-plugin-cleaner'
 
 export default [
   {
     input: './src/rehook/index.js',
     external: ['react', 'react-dom'],
     plugins: [
+      cleaner({
+        targets: ['dist'],
+      }),
       replace({
         'process.env.NODE_ENV': JSON.stringify('production'),
       }),

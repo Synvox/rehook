@@ -59,7 +59,9 @@
     "not ie <= 11",
     "not op_mini all"
   ],
-  "dependencies": {},
+  "dependencies": {
+    "rollup-plugin-cleaner": "^0.2.0"
+  },
   "husky": {
     "hooks": {
       "pre-commit": "yarn test",
