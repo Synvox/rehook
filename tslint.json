@@ -1,8 +1,18 @@
 {
-  "extends": ["tslint:latest"],
+  "extends": [
+    "tslint:latest"
+  ],
   "rules": {
-    "semicolon": [true, "never"],
-    "ban-types": [false],
-    "trailing-comma": [true, "never"]
+    "semicolon": [
+      true,
+      "never"
+    ],
+    "ban-types": [
+      false
+    ],
+    "trailing-comma": [
+      true,
+      "never"
+    ]
   }
 }

@@ -111,7 +111,7 @@ export function withPropsOnChange(
  *
  * @param fn
  */
-export function withProps(fn: Function | Object): void
+export function withProps(fn: object | ((props: object) => object)): (props: object) => { [key: string]: string }
 
 /**
  *
