@@ -6,45 +6,45 @@
  * @returns
  */
 export function branch(
-  condition: () => void,
-  left: () => void,
-  right: () => void
-): () => void
+  condition: Function,
+  left: Function,
+  right: Function
+): Function
 
 /**
  *
  * @param component
  * @returns
  */
-export function catchRender(component: () => void): object
+export function catchRender(component: Function): Object
 
 /**
  *
  * @param defaultProps
  * @returns
  */
-export function defaultProps(defaultProps: object): object
+export function defaultProps(defaultProps: Object): Object
 
 /**
  *
  * @param propName
  * @returns
  */
-export function flattenProp(propName: string | symbol): object
+export function flattenProp(propName: string | symbol): Object
 
 /**
  *
  * @param spec
  * @returns
  */
-export function lifecycle(spec: object): object
+export function lifecycle(spec: Object): Object
 
 /**
  *
  * @param fn
  * @returns
  */
-export function mapProps(fn: () => void): object
+export function mapProps(fn: Function): Object
 
 /**
  *
@@ -52,17 +52,14 @@ export function mapProps(fn: () => void): object
  * @param enhance
  * @returns
  */
-export function namespace(
-  propName: string | symbol,
-  enhance: () => void
-): object
+export function namespace(propName: string | symbol, enhance: Function): Object
 
 /**
  *
  * @param fns
  * @returns
  */
-export function pipe(...fns: () => void[]): object
+export function pipe(...fns: Function): Object
 
 /**
  *
@@ -70,34 +67,34 @@ export function pipe(...fns: () => void[]): object
  * @param b
  * @returns
  */
-export function renameProp(a: string | symbol, b: string | symbol): object
+export function renameProp(a: string | symbol, b: string | symbol): Object
 
 /**
  *
  * @param propMap
  * @returns
  */
-export function renameProps(propMap: object): object
+export function renameProps(propMap: Object): Object
 
 /**
  *
  * @param comp
  * @returns
  */
-export function renderComponent(comp: any): object
+export function renderComponent(comp: any): Object
 
 /**
  *
  * @returns
  */
-export function renderNothing(): object
+export function renderNothing(): Object
 
 /**
  *
  * @param handlers
  * @returns
  */
-export function withHandlers(handlers: object): object
+export function withHandlers(handlers: Object): Object
 
 /**
  *
@@ -107,14 +104,14 @@ export function withHandlers(handlers: object): object
  */
 export function withPropsOnChange(
   shouldMapOrKeys: any,
-  createProps: () => void
-): object
+  createProps: Function
+): Object
 
 /**
  *
  * @param fn
  */
-export function withProps(fn: () => void | object): void
+export function withProps(fn: Function | Object): void
 
 /**
  *
@@ -126,7 +123,7 @@ export function withProps(fn: () => void | object): void
 export function withReducer(
   stateName: string | symbol,
   dispatchName: string | symbol,
-  reducer: () => void,
+  reducer: Function,
   initialValue: any
 ): void
 
@@ -136,7 +133,7 @@ export function withReducer(
  * @param handlers
  * @returns
  */
-export function withStateHandlers(initialValue: any, handlers: object): object
+export function withStateHandlers(initialValue: any, handlers: Object): Object
 
 /**
  *

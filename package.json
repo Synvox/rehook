@@ -47,7 +47,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test:eslint": "eslint src --fix",
-    "test:tslint": "tslint src/index.d.ts --project tsconfig.json --fix",
+    "test:tslint": "tslint src/rehook/index.d.ts --project tsconfig.json --fix",
     "test:jest": "react-scripts test",
     "test": "CI=true npm run test:eslint && CI=true npm run test:tslint && CI=true npm run test:jest --findRelatedTests",
     "eject": "react-scripts eject",
