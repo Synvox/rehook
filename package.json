@@ -7,7 +7,6 @@
   "source": "src/rehook/index.js",
   "types": "dist/rehook.d.ts",
   "devDependencies": {
-    "@otris/jsdoc-tsd": "^1.0.4",
     "babel-eslint": "9.0.0",
     "enzyme": "^3.7.0",
     "enzyme-adapter-react-16": "^1.6.0",
@@ -52,8 +51,7 @@
     "test": "CI=true npm run test:eslint && CI=true npm run test:tslint && CI=true npm run test:jest --findRelatedTests",
     "eject": "react-scripts eject",
     "build:bundle": "NODE_ENV='production' rollup --config rollup.config.js",
-    "build:types": "jsdoc -t node_modules/@otris/jsdoc-tsd -r ./src/rehook -d dist/rehook.d.ts",
-    "prepublish": "npm run build:bundle && npm run build:types"
+    "prepublish": "npm run build:bundle"
   },
   "browserslist": [
     ">0.2%",
