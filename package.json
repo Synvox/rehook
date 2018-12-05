@@ -30,6 +30,7 @@
     "react-scripts": "2.1.0",
     "rollup": "^0.67.1",
     "rollup-plugin-babel": "^4.0.3",
+    "rollup-plugin-cleaner": "^0.2.0",
     "rollup-plugin-commonjs": "^9.2.0",
     "rollup-plugin-copy": "^0.2.3",
     "rollup-plugin-node-resolve": "^3.4.0",
@@ -59,9 +60,7 @@
     "not ie <= 11",
     "not op_mini all"
   ],
-  "dependencies": {
-    "rollup-plugin-cleaner": "^0.2.0"
-  },
+  "dependencies": {},
   "husky": {
     "hooks": {
       "pre-commit": "yarn test",
