@@ -4,7 +4,7 @@
 
 Rehook implements an API similar to [Recompose](https://github.com/acdlite/recompose), but using React Hooks.
 
-> Note, React Hooks are in alpha. Refer to the official documentation: [React Hooks](https://reactjs.org/docs/hooks-intro.html)
+> React Hooks is a feature of React >=16.8.0. Refer to the official documentation: [React Hooks](https://reactjs.org/docs/hooks-intro.html)
 
 ```
 npm i @synvox/rehook
