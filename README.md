@@ -16,18 +16,6 @@ Hooks are a great idea and I want to migrate my enhancers from Recompose to Reac
 
 React Hooks can do most of what Recompose can do, but without wrapping components in other components. This is a huge win! But what happens to all the code written to use recompose? Rehook is a migration strategy from higher order components to hooks.
 
-## Backwards Compatibility
-
-Before Promises, JavaScript developers used a pattern called “error first callbacks”. Callbacks are flexible and easy to understand, but not composable. This lead to “the callback pyramid of doom” where callbacks were called in callbacks.
-
-When promises were introduced, suddenly developers were able to chain asynchronous code together with `.then()`. This was great and simplified asynchronous code. Callbacks still exist (and should) because they are often the best tool for the job. Promises are composable, but are more difficult to reason about than a single callback.
-
-Then the JavaScript community got `async/await`. It was like magic! Suddenly we could write asynchronous code imperatively, and it used promises under the hood. This was important because Promise based logic could be easily reused with `async/await`.
-
-_In React, we’re undergoing a similar renaissance._ Higher Order Components are like Promises: easily composable, not easily understood. Render Props are like callbacks: understandable, flexible, not easily composable. React Hooks are like `async/await`. Suddenly we can write understandable, composable logic and decouple reusable logic from components.
-
-There are tons of higher order component code written with Recompose, that could (and should) use hooks instead, but there is no migration plan. Luckily recompose in an implementation of functional mixins on React components. We can recreate this interface but use hooks instead of components. _This way you can use your existing Recompose enhancers as hooks_, similar to how you can use your existing Promise based code with async/await.
-
 _With Rehook_
 
 ```js
