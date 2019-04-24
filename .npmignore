@@ -2,3 +2,4 @@ public
 src
 yarn.lock
 build
+coverage

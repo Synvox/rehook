@@ -1,7 +1,7 @@
 {
   "name": "@synvox/rehook",
   "public": true,
-  "version": "0.0.16",
+  "version": "0.0.17",
   "main": "dist/index.js",
   "devDependencies": {
     "@babel/cli": "^7.1.5",
