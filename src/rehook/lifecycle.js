@@ -1,9 +1,8 @@
-import React from 'react'
-// @ts-ignore
-const { useEffect, useRef, useState } = React
+// @ts-check
+import { useEffect, useRef, useState } from 'react'
 
 function usePrevious(value) {
-  const ref = useRef()
+  const ref = useRef(null)
 
   useEffect(() => {
     ref.current = value
@@ -13,8 +12,8 @@ function usePrevious(value) {
 }
 
 /**
- * @param {Object} spec
- * @returns {Object}
+ * @param {{componentDidMount?:Function, componentWillUnmount?:Function, componentDidUpdate?:Function }} spec
+ * @returns {object}
  */
 const lifecycle = spec => (props = {}) => {
   const [state, setStateRaw] = useState({})

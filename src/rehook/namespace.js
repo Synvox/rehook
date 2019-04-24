@@ -1,7 +1,8 @@
+// @ts-check
 /**
  * @param {string|symbol} propName
  * @param {Function} enhance
- * @returns {Object}
+ * @returns {object}
  */
 const namespace = (propName, enhance) => (props = {}) => ({
   ...props,

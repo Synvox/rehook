@@ -1,6 +1,7 @@
+// @ts-check
 /**
  * @param {Function} fn
- * @returns {Object}
+ * @returns {object}
  */
 const mapProps = fn => (props = {}) => fn(props)
 

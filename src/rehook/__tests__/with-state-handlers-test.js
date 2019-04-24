@@ -2,6 +2,7 @@
 
 import testUtil from '../test-utils'
 import withStateHandlers from '../with-state-handlers'
+import { act } from 'react-dom/test-utils'
 
 test('with state handlers', () => {
   const getProps = testUtil(
@@ -14,7 +15,7 @@ test('with state handlers', () => {
     {}
   )
 
-  getProps().handle({ b: true })
+  act(() => getProps().handle({ b: true }))
   expect(getProps().b).toEqual(true)
 })
 
@@ -29,7 +30,7 @@ test('with state handlers calling undefined', () => {
     {}
   )
 
-  getProps().handle()
+  act(() => getProps().handle())
   expect(getProps().b).toEqual(false)
 })
 
@@ -41,6 +42,6 @@ test('with state handlers memo', () => {
     {}
   )
 
-  getProps().handle({ b: true })
+  act(() => getProps().handle({ b: true }))
   expect(getProps().b).toEqual(true)
 })

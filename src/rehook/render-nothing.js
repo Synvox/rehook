@@ -1,9 +1,10 @@
+// @ts-check
 /**
- * @returns {Object}
+ * @returns {object}
  */
 const renderNothing = (/* props */) => {
   // eslint-disable-next-line
-  throw null;
+  throw null
 }
 
 export default renderNothing

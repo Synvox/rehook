@@ -1,6 +1,6 @@
+// @ts-check
 /**
- *
- * @param {Function|Object} fn
+ * @param {Function|object} fn
  */
 const withProps = fn => (props = {}) => ({
   ...props,

@@ -1,12 +1,9 @@
-import React from 'react'
-// @ts-ignore
-const { useReducer, useMemo } = React
+import { useReducer, useMemo } from 'react'
 
 /**
- *
  * @param {any} initialValue
- * @param {Object} handlers
- * @returns {Object}
+ * @param {object} handlers
+ * @returns {object}
  */
 const withStateHandlers = (initialValue, handlers) => (props = {}) => {
   const actionTypes = Object.keys(handlers)

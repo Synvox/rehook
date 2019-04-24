@@ -1,12 +1,10 @@
-import React from 'react'
-// @ts-ignore
-const { useReducer, useMemo } = React
+// @ts-check
+import { useReducer, useMemo } from 'react'
 
 /**
- *
  * @param {string|symbol} stateName
  * @param {string|symbol} dispatchName
- * @param {Function} reducer
+ * @param {(prevState: any, action: any)=>any} reducer
  * @param {any} initialValue
  */
 const withReducer = (

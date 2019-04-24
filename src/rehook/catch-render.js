@@ -1,8 +1,9 @@
+// @ts-check
 import React from 'react'
 
 /**
- * @param {Function} component
- * @returns {Object}
+ * @param {import('react').FunctionComponent} component
+ * @returns {object}
  */
 const catchRender = component => {
   const newComponent = (props = {}) => {

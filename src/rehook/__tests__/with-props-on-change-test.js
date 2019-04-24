@@ -4,6 +4,7 @@ import testUtil from '../test-utils'
 import pipe from '../pipe'
 import withState from '../with-state'
 import withPropsOnChange from '../with-props-on-change'
+import { act } from 'react-dom/test-utils'
 
 test('maps props using fn true', () => {
   let called = 0
@@ -26,7 +27,7 @@ test('maps props using fn true', () => {
   expect(getProps().a).toBe(true)
   expect(getProps().b).toBe(0)
   expect(called).toBe(1)
-  getProps().setB(1)
+  act(() => getProps().setB(1))
   expect(called).toBe(2)
   expect(getProps().a).toBe(true)
   expect(getProps().c).toBe(1)
@@ -53,7 +54,7 @@ test('maps props using fn false', () => {
   expect(getProps().a).toBe(true)
   expect(getProps().b).toBe(0)
   expect(called).toBe(1)
-  getProps().setB(1)
+  act(() => getProps().setB(1))
   expect(called).toBe(1)
   expect(getProps().a).toBe(true)
   expect(getProps().c).toBe(0)
@@ -77,7 +78,7 @@ test('maps props using keys', () => {
   expect(getProps().a).toBe(true)
   expect(getProps().b).toBe(0)
   expect(called).toBe(1)
-  getProps().setB(1)
+  act(() => getProps().setB(1))
   expect(called).toBe(2)
   expect(getProps().a).toBe(true)
   expect(getProps().b).toBe(1)
