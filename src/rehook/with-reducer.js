@@ -4,7 +4,7 @@ import { useReducer, useMemo } from 'react'
 /**
  * @param {string|symbol} stateName
  * @param {string|symbol} dispatchName
- * @param {(prevState: any, action: any)=>any} reducer
+ * @param {Function} reducer
  * @param {any} initialValue
  */
 const withReducer = (
@@ -14,6 +14,7 @@ const withReducer = (
   initialValue
 ) => props => {
   const [state, dispatch] = useReducer(
+    // @ts-ignore
     reducer,
     typeof initialValue === 'function'
       ? useMemo(() => initialValue(props), [])

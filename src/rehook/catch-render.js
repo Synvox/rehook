@@ -2,7 +2,7 @@
 import React from 'react'
 
 /**
- * @param {import('react').FunctionComponent} component
+ * @param {Function} component
  * @returns {object}
  */
 const catchRender = component => {
@@ -20,6 +20,7 @@ const catchRender = component => {
   }
 
   newComponent.displayName =
+    // @ts-ignore
     component.displayName || component.name || 'Component'
 
   return newComponent

@@ -5,7 +5,7 @@ import { useMemo } from 'react'
 // is cached and kept the same regardless of updates.
 
 /**
- * @param {(any)=>boolean} condition
+ * @param {Function} condition
  * @param {Function} left
  * @param {Function} right
  * @returns {Function}

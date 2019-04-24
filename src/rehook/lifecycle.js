@@ -12,7 +12,7 @@ function usePrevious(value) {
 }
 
 /**
- * @param {{componentDidMount?:Function, componentWillUnmount?:Function, componentDidUpdate?:Function }} spec
+ * @param {object} spec
  * @returns {object}
  */
 const lifecycle = spec => (props = {}) => {
