@@ -1,7 +1,7 @@
 {
   "name": "@synvox/rehook",
   "public": true,
-  "version": "0.0.15",
+  "version": "0.0.16",
   "main": "dist/index.js",
   "devDependencies": {
     "@babel/cli": "^7.1.5",
@@ -46,7 +46,7 @@
     "build:bundle": "NODE_ENV='production' babel -s -d ./dist/ ./src/rehook",
     "build:package": "cp ./README.md dist/README.md && cp ./package.json dist/package.json",
     "build:types": "jsdoc -t node_modules/@otris/jsdoc-tsd -r ./src/rehook -d dist/rehook.d.ts",
-    "publish": "npm run build && cd dist && npm publish && cd .."
+    "pub": "npm run build && npm publish"
   },
   "browserslist": [
     ">0.2%",
