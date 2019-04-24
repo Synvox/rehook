@@ -1,9 +1,6 @@
-import React from 'react'
-// @ts-ignore
-const { useState, useMemo } = React
+import { useState, useMemo } from 'react'
 
 /**
- *
  * @param {string|symbol} stateName
  * @param {string|symbol} stateUpdaterName
  * @param {any} initialState

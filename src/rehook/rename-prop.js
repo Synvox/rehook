@@ -1,7 +1,8 @@
+// @ts-check
 /**
  * @param {string|symbol} a
  * @param {string|symbol} b
- * @returns {Object}
+ * @returns {object}
  */
 const renameProp = (a, b) => ({ [a]: prop, ...props } = {}) => ({
   ...props,

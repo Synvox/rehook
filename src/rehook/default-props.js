@@ -1,6 +1,7 @@
+// @ts-check
 /**
- * @param {Object} defaultProps
- * @returns {Object}
+ * @param {object} defaultProps
+ * @returns {object}
  */
 const defaultProps = defaultProps => (props = {}) => ({
   ...defaultProps,

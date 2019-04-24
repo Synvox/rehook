@@ -1,9 +1,7 @@
-import React from 'react'
-// @ts-ignore
-const { useReducer, useMemo } = React
+// @ts-check
+import { useReducer, useMemo } from 'react'
 
 /**
- *
  * @param {string|symbol} stateName
  * @param {string|symbol} dispatchName
  * @param {Function} reducer
@@ -16,6 +14,7 @@ const withReducer = (
   initialValue
 ) => props => {
   const [state, dispatch] = useReducer(
+    // @ts-ignore
     reducer,
     typeof initialValue === 'function'
       ? useMemo(() => initialValue(props), [])

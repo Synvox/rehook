@@ -1,6 +1,7 @@
+// @ts-check
 /**
  * @param {string|symbol} propName
- * @returns {Object}
+ * @returns {object}
  */
 const flattenProp = propName => (props = {}) => ({
   ...props,

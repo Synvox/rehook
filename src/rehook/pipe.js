@@ -1,6 +1,7 @@
+// @ts-check
 /**
  * @param  {...Function[]} fns
- * @returns {Object}
+ * @returns {object}
  */
 const pipe = (...fns) => (props = {}) => fns.reduce((v, f) => f(v), props)
 

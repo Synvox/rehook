@@ -1,11 +1,10 @@
-import React from 'react'
-// @ts-ignore
-const { useMemo } = React
+// @ts-check
+import { useMemo } from 'react'
 
 /**
  *
- * @param {Object} handlers
- * @returns {Object}
+ * @param {object} handlers
+ * @returns {object}
  */
 const withHandlers = handlers => (props = {}) => {
   const realHandlers = useMemo(

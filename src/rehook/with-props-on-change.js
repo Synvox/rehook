@@ -1,9 +1,8 @@
-import React from 'react'
-// @ts-ignore
-const { useMemo, useRef, useEffect } = React
+// @ts-check
+import { useMemo, useRef, useEffect } from 'react'
 
 function usePrevious(value) {
-  const ref = useRef()
+  const ref = useRef(null)
 
   useEffect(() => {
     ref.current = value

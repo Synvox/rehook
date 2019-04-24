@@ -1,13 +1,10 @@
-import React from 'react'
-// @ts-ignore
-const { useMemo } = React
-
+// @ts-check
+import { useMemo } from 'react'
 // Note, branching disobeys one of the hook rules because
 // it wraps hooks in a condition. For this reason, the branch
 // is cached and kept the same regardless of updates.
 
 /**
- *
  * @param {Function} condition
  * @param {Function} left
  * @param {Function} right

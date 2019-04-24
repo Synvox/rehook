@@ -1,6 +1,7 @@
+// @ts-check
 /**
- * @param {Object} propMap
- * @returns {Object}
+ * @param {object} propMap
+ * @returns {object}
  */
 const renameProps = propMap => (props = {}) => ({
   // Remove renamed props

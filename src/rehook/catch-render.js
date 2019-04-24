@@ -1,8 +1,9 @@
+// @ts-check
 import React from 'react'
 
 /**
  * @param {Function} component
- * @returns {Object}
+ * @returns {object}
  */
 const catchRender = component => {
   const newComponent = (props = {}) => {
@@ -19,6 +20,7 @@ const catchRender = component => {
   }
 
   newComponent.displayName =
+    // @ts-ignore
     component.displayName || component.name || 'Component'
 
   return newComponent
