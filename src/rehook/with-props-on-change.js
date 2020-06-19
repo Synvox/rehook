@@ -22,7 +22,7 @@ const withPropsOnChange = (shouldMapOrKeys, createProps) => (props = {}) => {
 
   const keys = Array.isArray(shouldMapOrKeys)
     ? shouldMapOrKeys.map(key => props[key])
-    : shouldMapOrKeys(props, previousProps)
+    : shouldMapOrKeys(previousProps, props)
       ? undefined
       : []
 
